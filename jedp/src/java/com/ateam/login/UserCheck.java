@@ -42,7 +42,11 @@ public String checkUser() throws Exception {
     String status = "unauthorized";
     
 		HibernateDAO dao =(HibernateDAO)ServiceFinder.findBean("SpringHibernateDao");
+<<<<<<< HEAD
                 
+=======
+
+>>>>>>> parent of 1c6d42f... Minor change to UserCheck, functionality test.
 		if(dao.validateUser(getUserName(),getPwd())!=null){
 			exist=true;
 			status = "index";
