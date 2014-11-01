@@ -42,12 +42,12 @@ public String checkUser() throws Exception {
     String status = "unauthorized";
     
 		HibernateDAO dao =(HibernateDAO)ServiceFinder.findBean("SpringHibernateDao");
-                
+                exist=false;
 		if(dao.validateUser(getUserName(),getPwd())!=null){
 			exist=true;
 			status = "index";
 		}
-		exist=false;
+		
     return status;
   		
 }    
