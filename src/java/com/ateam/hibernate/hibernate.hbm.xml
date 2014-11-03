@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.ateam.hibernate.UserAttr" table="users">
+      <id
+        name="userId"
+        type="java.lang.Integer"
+        column="USER_ID"
+    >
+        <generator class="increment" />
+    </id>
+
+    <property
+        name="userName"
+        type="java.lang.String"
+        column="USER_NAME"
+        length="45"
+    />
+    <property
+        name="userPassword"
+        type="java.lang.String"
+        column="PASSWORD"
+        length="45"
+    />
+    <property
+        name="userFullName"
+        type="java.lang.String"
+        column="FULL_NAME"
+        length="45"
+    />
+    <property
+        name="userRole"
+        type="java.lang.String"
+        column="ROLE"
+        length="45"
+    />
+    <!-- Associations -->
+  
+
+</class>
+<class name="com.ateam.app.Questions" table="questions">
+      <composite-id>
+        <key-property name="skillId" type="java.lang.Integer" column="SKILL_ID"/>
+        <key-property name="questionId" type="java.lang.Integer" column="QUESTION_ID"/>
+        <generator class="increment" />
+    </composite-id>
+
+    <property
+        name="questionText"
+        type="java.lang.String"
+        column="QUESTION_TEXT"
+        length="500"
+    />
+    <property
+        name="difficulty"
+        type="java.lang.String"
+        column="DIFFICULTY"
+        length="10"
+    />
+    <property
+        name="exTime"
+        type="java.lang.String"
+        column="EXPECTED_TIME"
+        length="5"
+    />
+    <property
+        name="exAnswer"
+        type="java.lang.String"
+        column="EXPECTED_ANSWER"
+        length="500"
+    />
+    <!-- Associations -->
+  
+
+</class>
+</hibernate-mapping>
