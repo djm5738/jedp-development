@@ -8,15 +8,18 @@
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <h:outputStylesheet name="./css/default.css"/>
-        <h:outputStylesheet name="./css/cssLayout.css"/>
+        <style type="text/css">
+        html{margin:0 auto;max-width:20em;padding-top: 200px;}
+        <h:outputStylesheet name="./css/default1.css"/>
+        <h:outputStylesheet name="./css/cssLayout1.css"/>
+        </style>
         <title>JEDP Application</title>
     </h:head>
         <center>
 
     <h:body>
         <div id="top" class="top">
-            <ui:insert name="top"><h:graphicImage library="images" name="App_Title.png" width="900" height="83" /></ui:insert>
+            <ui:insert name="top"><h:graphicImage library="images" name="App_Title.png" width="100%"/></ui:insert>
         </div>
 
         <div id="content" class="center_content">
@@ -29,10 +32,10 @@
                             </f:facet>
 			<h:panelGroup>
 				<h:outputText value=" "/>
-					<h:outputText value="User Name" styleClass="style2"/>
+					<h:outputText value="Username" styleClass="style2"/>
 			</h:panelGroup>
         <h:panelGroup>
-		<p:inputText id="UserName" value="#{UserCheck.userName}" size="27" required="true"/>
+		<p:inputText id="UserName" value="#{UserCheck.userName}" size="20" required="true"/>
 		<f:verbatim><br/></f:verbatim>
 		<h:message for="UserName" styleClass="errors"/>		
 	</h:panelGroup>
@@ -42,7 +45,7 @@
 	</h:panelGroup>
 						
 	<h:panelGroup>
-            <p:inputText id="Password" value="#{UserCheck.pwd}" size="27" required="true" type="password"/>
+            <p:inputText id="Password" value="#{UserCheck.pwd}" size="20" required="true" type="password"/>
 	    <f:verbatim><br/></f:verbatim>
 	    <p:message for="Password" styleClass="errors"/>
 	</h:panelGroup>

@@ -15,6 +15,7 @@ import org.springframework.dao.DataAccessException;
 public interface HibernateDAO {
    	public UserAttr checkUser(String strUserName) throws DataAccessException,java.sql.SQLException;
 	public UserAttr validateUser(String strUserName,String password) throws DataAccessException,java.sql.SQLException;
+        public String checkRole(String strUserName,String password) throws DataAccessException, java.sql.SQLException;
         public List <Questions> generateQuestion(Integer skillId,String difficulty) throws DataAccessException,java.sql.SQLException;
 	public void addUser(com.ateam.hibernate.UserAttr obj) throws DataAccessException; 
         public void deleteUser(String userName) throws DataAccessException;

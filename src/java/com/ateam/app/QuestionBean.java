@@ -63,6 +63,17 @@ public class QuestionBean implements Serializable {
             status = "results";
             return status;
   }
+        
+        public String adminGenerateQuestion() throws Exception {
+            String status = "placeholder";
+            HibernateDAO dao =(HibernateDAO)ServiceFinder.findBean("SpringHibernateDao");
+            com.ateam.app.Questions q = new com.ateam.app.Questions();
+            q.setSkillId(getSkillId());
+            q.setDifficulty(getDifficulty());
+            status2 = dao.generateQuestion(getSkillId(),getDifficulty());
+            status = "adminResults";
+            return status;
+  }
         public List questionList() throws Exception{
             return status2;
         }

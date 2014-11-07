@@ -17,7 +17,9 @@ import javax.faces.context.FacesContext;
 public class UserCheck implements Serializable{
 	String userName;
 	String pwd;
+        String role;
 	boolean exist;
+        String role2;
 			
 	public void setUserName(String userName){
 		this.userName=userName;
@@ -38,6 +40,9 @@ public class UserCheck implements Serializable{
 	public boolean getExist(){
 		return exist;
 	}
+        public String getRole(){
+		return role;
+	}
 public String checkUser() throws Exception {
     String status = "unauthorized";
     
@@ -45,10 +50,16 @@ public String checkUser() throws Exception {
 
 		if(dao.validateUser(getUserName(),getPwd())!=null){
 			exist=true;
-			status = "index";
-		}
+                        role2 = dao.checkRole(getUserName(),getPwd());
+                            if(role2.equals("Admin")){
+                                status = "Adminindex";
+		}else {
+                                status = "index";
+        }
 		exist=false;
-    return status;
+    
   		
-}    
+} 
+                return status;
+}
 }
