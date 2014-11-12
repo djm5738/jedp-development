@@ -64,14 +64,8 @@ public class Bean implements Serializable {
 
 
 public String newUser() throws Exception {
-    String status = "User Already Exists";
-    if (validateData()) {  
+    String status = "success";
 		HibernateDAO dao =(HibernateDAO)ServiceFinder.findBean("SpringHibernateDao");
-
-		if(dao.checkUser(getUserName())!=null){
-			exist=true;
-			status = "User Already Exists";
-		}else{
 
 			com.ateam.hibernate.UserAttr user = new com.ateam.hibernate.UserAttr();
 
@@ -91,25 +85,29 @@ public String newUser() throws Exception {
 
 			dao.addUser(user);
 				status = "success";
-		}
         
 
-	}
     return status;
   }
-
 public String deleteUser() throws Exception {
     String status = "User Does Not Exist";
     if (validateData()) {  
 		HibernateDAO dao =(HibernateDAO)ServiceFinder.findBean("SpringHibernateDao");
 
-			com.ateam.hibernate.UserDelete user = new com.ateam.hibernate.UserDelete();
+			com.ateam.hibernate.UserAttr user = new com.ateam.hibernate.UserAttr();
 			user.setUserName(getUserName());
 
 			dao.deleteUser(getUserName());
 				status = "success";      
 	}
     return status;
+  }
+
+        public List listUsers() throws Exception {
+            HibernateDAO dao =(HibernateDAO)ServiceFinder.findBean("SpringHibernateDao");
+            com.ateam.hibernate.UserAttr u = new com.ateam.hibernate.UserAttr();
+            List users = dao.listUsers();
+            return users;
   }
 
 private boolean validateData() {

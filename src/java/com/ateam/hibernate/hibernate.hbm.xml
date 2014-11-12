@@ -39,11 +39,14 @@
 
 </class>
 <class name="com.ateam.app.Questions" table="questions">
-      <composite-id>
-        <key-property name="skillId" type="java.lang.Integer" column="SKILL_ID"/>
-        <key-property name="questionId" type="java.lang.Integer" column="QUESTION_ID"/>
+    <id
+        name="questionId"
+        type="java.lang.String"
+        column="QUESTION_ID"
+        length="45"
+    >
         <generator class="increment" />
-    </composite-id>
+    </id>
 
     <property
         name="questionText"
@@ -61,13 +64,31 @@
         name="exTime"
         type="java.lang.String"
         column="EXPECTED_TIME"
-        length="5"
+        length="15"
     />
     <property
         name="exAnswer"
         type="java.lang.String"
         column="EXPECTED_ANSWER"
         length="500"
+    />
+        <property
+        name="questionType"
+        type="java.lang.String"
+        column="QUESTION_TYPE"
+        length="45"
+    />
+        <property
+        name="businessUnit"
+        type="java.lang.String"
+        column="BUSINESS_UNIT"
+        length="45"
+    />
+    <property
+        name="skillId"
+        type="java.lang.String"
+        column="SKILL_ID"
+        length="45"
     />
     <!-- Associations -->
   

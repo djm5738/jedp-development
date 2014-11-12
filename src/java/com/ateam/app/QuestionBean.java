@@ -10,19 +10,29 @@ import java.io.Serializable;
 import java.util.*;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.annotation.PostConstruct;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import javax.faces.event.ActionEvent;
 /**
  *
  * @author Andrew
  */
+@ManagedBean
+@SessionScoped
 public class QuestionBean implements Serializable {
-    Integer skillId;
+    String skillId;
     String questionText;
     String difficulty;
     String exTime;
     String exAnswer;
+    String questionType;
+    String businessUnit;
     List status2;
+    HibernateDAO dao;
+    com.ateam.app.Questions q;
 				
-	public void setSkillId(Integer skillId){
+	public void setSkillId(String skillId){
 		this.skillId=skillId;
 	}
 	public void setQuestionText(String questionText){
@@ -38,7 +48,7 @@ public class QuestionBean implements Serializable {
 		this.exAnswer=exAnswer;
 	}
         
-	public Integer getSkillId(){
+	public String getSkillId(){
 		return skillId;
 	}
 	public String getQuestionText(){
@@ -53,6 +63,12 @@ public class QuestionBean implements Serializable {
 	public String getExAnswer(){
 		return exAnswer;
 	}
+        public String getquestionType(){
+		return questionType;
+	}
+        public String getbusinessUnit(){
+		return businessUnit;
+	}
         public String generateQuestion() throws Exception {
             String status = "placeholder";
             HibernateDAO dao =(HibernateDAO)ServiceFinder.findBean("SpringHibernateDao");
@@ -66,15 +82,21 @@ public class QuestionBean implements Serializable {
         
         public String adminGenerateQuestion() throws Exception {
             String status = "placeholder";
-            HibernateDAO dao =(HibernateDAO)ServiceFinder.findBean("SpringHibernateDao");
-            com.ateam.app.Questions q = new com.ateam.app.Questions();
+            dao =(HibernateDAO)ServiceFinder.findBean("SpringHibernateDao");
+            q = new com.ateam.app.Questions();
             q.setSkillId(getSkillId());
             q.setDifficulty(getDifficulty());
-            status2 = dao.generateQuestion(getSkillId(),getDifficulty());
+            status2=dao.generateQuestion(getSkillId(),getDifficulty());
             status = "adminResults";
             return status;
   }
         public List questionList() throws Exception{
             return status2;
+        }
+        
+        public void addQuestion() throws Exception{
+            q.setSkillId(getSkillId());
+            q.setDifficulty(getDifficulty());
+            status2.add(dao.generateQuestion(getSkillId(),getDifficulty()));
         }
 }

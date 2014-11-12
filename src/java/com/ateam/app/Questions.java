@@ -11,41 +11,45 @@ import java.io.Serializable;
  * @author agray
  */
 public class Questions implements Serializable {
-    private Integer skillId;
-    private Integer questionId;
+    private String skillId;
+    private String questionId;
     private String questionText;
     private String difficulty;
     private String exTime;
     private String exAnswer;
+    private String questionType;
+    private String businessUnit;
 
-    public Questions(Integer skillId, Integer questionID, String questionText, String difficulty, String exTime, String exAnswer) {
+    public Questions(String skillId, String questionID, String questionText, String difficulty, String exTime, String exAnswer,String questionType, String businessUnit) {
         this.skillId = skillId;
         this.questionId = questionID;
         this.questionText = questionText;
         this.difficulty = difficulty;
         this.exTime = exTime;
         this.exAnswer = exAnswer;
+        this.questionType = questionType;
+        this.businessUnit = businessUnit;
     }
 
     public Questions () {
     }
 
-    public Questions(Integer skillId) {
+    public Questions(String skillId) {
         this.skillId = skillId;
     }
 
-    public Integer getSkillId() {
+    public String getSkillId() {
         return this.skillId;
     }
 
-    public void setSkillId(Integer skillId) {
+    public void setSkillId(String skillId) {
         this.skillId = skillId;
     }
-    public Integer getQuestionId() {
+    public String getQuestionId() {
         return this.questionId;
     }
 
-    public void setQuestionId(Integer questionId) {
+    public void setQuestionId(String questionId) {
         this.questionId = questionId;
     }
 
@@ -80,5 +84,18 @@ public class Questions implements Serializable {
     public void setexAnswer(String exAnswer) {
         this.exAnswer = exAnswer;
     }
+    public String getquestionType() {
+        return this.questionType;
+    }
 
+    public void setquestionType(String questionType) {
+        this.questionType = questionType;
+    }
+    public String getbusinessUnit() {
+        return this.businessUnit;
+    }
+
+    public void setbusinessUnit(String businessUnit) {
+        this.businessUnit = businessUnit;
+    }
 }

@@ -64,7 +64,7 @@ public class HibernateDAOImpl extends HibernateDaoSupport implements HibernateDA
 		return obj;
 	}
 
-        public List<Questions> generateQuestion(Integer skillId,String difficulty)throws DataAccessException, java.sql.SQLException {
+        public List<Questions> generateQuestion(String skillId,String difficulty)throws DataAccessException, java.sql.SQLException {
             Questions obj = null;
             DetachedCriteria criteria = DetachedCriteria.forClass(Questions.class);
             criteria.add(Expression.eq("skillId", skillId));
@@ -80,16 +80,22 @@ public class HibernateDAOImpl extends HibernateDaoSupport implements HibernateDA
 		getHibernateTemplate().save(obj);
 	}
         public void deleteUser(String userName) throws DataAccessException {
-            UserDelete obj4 = null;
-            DetachedCriteria criteria4 = DetachedCriteria.forClass(UserDelete.class);
-                criteria4.add(Expression.eq("userName", userName));
+            UserAttr obj4 = null;
+            DetachedCriteria criteria4 = DetachedCriteria.forClass(UserAttr.class);
+                criteria4.add(Restrictions.eq("userName", userName));
                 List objs = getHibernateTemplate().findByCriteria(criteria4);
 		if ((objs != null) && (objs.size() > 0)) {
-			obj4 = (UserDelete) objs.get(0);
+			obj4 = (UserAttr) objs.get(0);
+                        getHibernateTemplate().delete(obj4);
 		}
-                getHibernateTemplate().delete(obj4);
+                
 	}
-        public void generateQuestion(Questions q) throws DataAccessException{
-            
-        }
+        public List<UserAttr> listUsers() throws DataAccessException, java.sql.SQLException {
+            UserAttr obj = null;
+            DetachedCriteria critfour = DetachedCriteria.forClass(UserAttr.class);
+            critfour.setProjection(Projections.property("userName"));
+            List objs = getHibernateTemplate().findByCriteria(critfour);
+
+		return objs;
+	}
 }
