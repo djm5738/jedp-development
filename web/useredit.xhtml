@@ -6,6 +6,7 @@
                 xmlns:p="http://primefaces.org/ui">
     >
     <ui:define name="content">
+        <f:event listener="#{Bean.unsetUserName}" type="preRenderView" />
                     <h:form>
                     				<h:outputText value="User Name" styleClass="style2"/>	
                                                 <f:verbatim><br/></f:verbatim>
