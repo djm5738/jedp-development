@@ -2,89 +2,109 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 
 <!--
-  - Application context definition for MyFaces, Hibernate and Spring Integration application.
-	-->
+- Application context definition for MyFaces, Hibernate and Spring Integration application.
+-->
 <beans>
 
-	<!-- ========================= RESOURCE DEFINITIONS ========================= -->
+    <!-- ========================= RESOURCE DEFINITIONS ========================= -->
   
-	<!-- Configurer that replaces ${...} placeholders with values from a properties file -->
-	<!-- (in this case, JDBC-related settings for the dataSource definition below) -->
-	<!-- Local DataSource that works in any environment -->
-	<!-- Note that DriverManagerDataSource does not pool; it is not intended for production -->
+    <!-- Configurer that replaces ${...} placeholders with values from a properties file -->
+    <!-- (in this case, JDBC-related settings for the dataSource definition below) -->
+    <!-- Local DataSource that works in any environment -->
+    <!-- Note that DriverManagerDataSource does not pool; it is not intended for production -->
 	
-	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName"><value>com.mysql.jdbc.Driver</value></property>
-		<property name="url"><value>jdbc:mysql://localhost:3306/jedp?zeroDateTimeBehavior=convertToNull</value></property>
-		<property name="username"><value>root</value></property>
-		<property name="password"><value>mysql</value></property>
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName">
+            <value>com.mysql.jdbc.Driver</value>
+        </property>
+        <property name="url">
+            <value>jdbc:mysql://localhost:3306/jedp?zeroDateTimeBehavior=convertToNull</value>
+        </property>
+        <property name="username">
+            <value>root</value>
+        </property>
+        <property name="password">
+            <value>mysql</value>
+        </property>
 
-	</bean>
+    </bean>
 	
 
-	<!-- JNDI DataSource for J2EE environments -->
-	<!--
-	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
-		<property name="jndiName"><value>java:comp/env/jdbc/roseindiaDB_local</value></property>
-	</bean>
-	-->
-	<!-- Hibernate SessionFactory -->
-	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-		<property name="dataSource"><ref local="dataSource"/></property>
-		<property name="mappingResources">
-		<list>
-			<value>/com/ateam/hibernate/hibernate.hbm.xml</value>
-		</list>
-		</property>
-		<property name="hibernateProperties">
-			<props>
-				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
-				<prop key="hibernate.show_sql">true</prop>
-			</props>
-		</property>
-	</bean>
+    <!-- JNDI DataSource for J2EE environments -->
+    <!--
+    <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+            <property name="jndiName"><value>java:comp/env/jdbc/roseindiaDB_local</value></property>
+    </bean>
+    -->
+    <!-- Hibernate SessionFactory -->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource">
+            <ref local="dataSource"/>
+        </property>
+        <property name="mappingResources">
+            <list>
+                <value>/com/ateam/hibernate/hibernate.hbm.xml</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">${hibernate.dialect}</prop>
+                <prop key="hibernate.show_sql">true</prop>
+            </props>
+        </property>
+    </bean>
 
 
-	<!-- Transaction manager for a single Hibernate SessionFactory (alternative to JTA) -->
-	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-		<property name="sessionFactory"><ref local="sessionFactory"/></property>
-	</bean>
+    <!-- Transaction manager for a single Hibernate SessionFactory (alternative to JTA) -->
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory">
+            <ref local="sessionFactory"/>
+        </property>
+    </bean>
 
 
-	<!-- ========================= BUSINESS OBJECT DEFINITIONS ========================= -->
+    <!-- ========================= BUSINESS OBJECT DEFINITIONS ========================= -->
 
-	<!--
-	 Data access object: Hibernate implementation.
+    <!--
+         Data access object: Hibernate implementation.
     -->
 
-	<bean id="HibernateSpringDaoTarget" class="com.ateam.hibernate.HibernateDAOImpl">
-		<property name="sessionFactory"><ref local="sessionFactory"/></property>
-	</bean>
+    <bean id="HibernateSpringDaoTarget" class="com.ateam.hibernate.HibernateDAOImpl">
+        <property name="sessionFactory">
+            <ref local="sessionFactory"/>
+        </property>
+    </bean>
 
-	<!--
-		- Transactional proxy for Application's central data access object.
-		-
-		- Defines specific transaction attributes with "readOnly" markers,
-		- which is an optimization that is particularly valuable with Hibernate
-		- (to suppress unnecessary flush attempts for read-only operations).
-		-
-		- Note that in a real-life app with multiple transaction proxies,
-		- you will probably want to use parent and child bean definitions
-		- as described in the manual, to reduce duplication.
+    <!--
+                - Transactional proxy for Application's central data access object.
+                -
+                - Defines specific transaction attributes with "readOnly" markers,
+                - which is an optimization that is particularly valuable with Hibernate
+                - (to suppress unnecessary flush attempts for read-only operations).
+                -
+                - Note that in a real-life app with multiple transaction proxies,
+                - you will probably want to use parent and child bean definitions
+                - as described in the manual, to reduce duplication.
     -->
 
-	<bean id="SpringHibernateDao" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
-		<property name="transactionManager"><ref local="transactionManager"/></property>
-		<property name="target"><ref local="HibernateSpringDaoTarget"/></property>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
-				<prop key="find*">PROPAGATION_REQUIRED,readOnly</prop>
-				<prop key="load*">PROPAGATION_REQUIRED,readOnly</prop>
-				<prop key="store*">PROPAGATION_REQUIRED</prop>
-				<prop key="add*">PROPAGATION_REQUIRED</prop>
-			</props>
-		</property>
-	</bean>
+    <bean id="SpringHibernateDao" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager">
+            <ref local="transactionManager"/>
+        </property>
+        <property name="target">
+            <ref local="HibernateSpringDaoTarget"/>
+        </property>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+                <prop key="find*">PROPAGATION_REQUIRED,readOnly</prop>
+                <prop key="execute*">PROPAGATION_REQUIRED</prop>
+                <prop key="add*">PROPAGATION_REQUIRED</prop>
+                <prop key="create*">PROPAGATION_REQUIRED</prop>
+                <prop key="update*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+            </props>
+        </property>
+    </bean>
 
 </beans>
