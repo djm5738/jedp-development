@@ -1,68 +1,69 @@
 <ui:composition template="resources/AdminTemplate.xhtml"
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:p="http://primefaces.org/ui">
->
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+    >
     <ui:define name="content">
-                    <h:form>
-                    				<h:outputText value="User Name" styleClass="style2"/>	
-                                                <f:verbatim><br/></f:verbatim>
-						<h:panelGroup>
-							<h:inputText id="userName" value="#{Bean.userName}" required="true" size="27" />
-							<f:verbatim><br/></f:verbatim>
-							<h:message for="userName" styleClass="errors"/>
-						</h:panelGroup>
-
-						<h:outputText value="Password" styleClass="style2"/>
-                                                <f:verbatim><br/></f:verbatim>
-						<h:panelGroup>
-							<h:inputSecret id="Password" value="#{Bean.pwd}" size="27" redisplay="true" required="true"/>
-							<f:verbatim><br/></f:verbatim>
-							<h:message for="Password" styleClass="errors" />
-						</h:panelGroup>
-
-						<h:outputText value="Confirm Password" styleClass="style2"/>
-                                                <f:verbatim><br/></f:verbatim>
-						<h:panelGroup>
-							<h:inputSecret id="confirmPassword" value="#{Bean.confPwd}" size="27" redisplay="true" required="true"/>
-							<f:verbatim><br/></f:verbatim>
-							<h:message for="confirmPassword" styleClass="errors" />
-						</h:panelGroup>
-						
-						<h:outputText value="Full Name" styleClass="style2"/>
-                                                <f:verbatim><br/></f:verbatim>
-						<h:panelGroup>
-							<h:inputText id="FullName" value="#{Bean.userFullName}" size="27" required="true"/>
-							<f:verbatim><br/></f:verbatim>
-							<h:message for="Full Name" styleClass="errors" />
-						</h:panelGroup>
-
-						<h:outputText value="Role" styleClass="style2"/>
-                                                <f:verbatim><br/></f:verbatim>
-						<h:panelGroup>
-							<h:inputText id="address" value="#{Bean.userRole}" size="27" required="true"/>
-							<f:verbatim><br/></f:verbatim>
-							<h:message for="role" styleClass="errors" />
-						</h:panelGroup>
-                                                
-                                                <h:outputText value=" "/>
-                <h:panelGroup>
-		<p:commandButton value="Add User" action="#{Bean.newUser}" icon="ui-icon-check" style="margin:0"/>
-		</h:panelGroup>
-                      <f:verbatim><br/></f:verbatim>  
-                      <f:verbatim><br/></f:verbatim>
-                <h:outputText value="Remove User by User Name" styleClass="style2"/> 
+        <h:form>
+            <h:outputText value="User Name" styleClass="style2"/>	
+            <f:verbatim><br/></f:verbatim>
+            <h:panelGroup>
+                <h:inputText id="userName" value="#{Bean.userName}" required="true" size="27" />
                 <f:verbatim><br/></f:verbatim>
-                <h:panelGroup>
-                    						
-                    <h:inputText id="userName2" value="#{Bean.userName}" required="true" size="27" />
-                    <f:verbatim><br/></f:verbatim>
-                    <h:message for="userName2" styleClass="errors"/>
-			<f:verbatim><br/></f:verbatim>			
-		<p:commandButton value="Remove User" action="#{Bean.deleteUser}" icon="ui-icon-check" style="margin:0"/>
-		</h:panelGroup>
-</h:form>
+                <h:message for="userName" styleClass="errors"/>
+            </h:panelGroup>
+
+            <h:outputText value="Password" styleClass="style2"/>
+            <f:verbatim><br/></f:verbatim>
+            <h:panelGroup>
+                <h:inputSecret id="Password" value="#{Bean.pwd}" size="27" redisplay="true" required="true"/>
+                <f:verbatim><br/></f:verbatim>
+                <h:message for="Password" styleClass="errors" />
+            </h:panelGroup>
+
+            <h:outputText value="Confirm Password" styleClass="style2"/>
+            <f:verbatim><br/></f:verbatim>
+            <h:panelGroup>
+                <h:inputSecret id="confirmPassword" value="#{Bean.confPwd}" size="27" redisplay="true" required="true"/>
+                <f:verbatim><br/></f:verbatim>
+                <h:message for="confirmPassword" styleClass="errors" />
+            </h:panelGroup>
+
+            <h:outputText value="Full Name" styleClass="style2"/>
+            <f:verbatim><br/></f:verbatim>
+            <h:panelGroup>
+                <h:inputText id="FullName" value="#{Bean.userFullName}" size="27" required="true"/>
+                <f:verbatim><br/></f:verbatim>
+                <h:message for="Full Name" styleClass="errors" />
+            </h:panelGroup>
+
+            <h:outputText value="Role" styleClass="style2"/>
+            <f:verbatim><br/></f:verbatim>
+            <h:panelGroup>
+                <h:inputText id="address" value="#{Bean.userRole}" size="27" required="true"/>
+                <f:verbatim><br/></f:verbatim>
+                <h:message for="role" styleClass="errors" />
+            </h:panelGroup>
+
+            <h:outputText value=" "/>
+            <h:panelGroup>
+                <p:commandButton value="Add User" action="#{Bean.newUser}" icon="ui-icon-check" style="margin:0"/>
+            </h:panelGroup>
+            <f:verbatim><br/></f:verbatim>  
+            <f:verbatim><br/></f:verbatim>
+            <h:outputText value="Remove User by User Name" styleClass="style2"/> 
+            <f:verbatim><br/></f:verbatim>
+        </h:form>
+        <h:form>
+            <h:panelGroup>
+                <h:inputText id="userName2" value="#{Bean.userName}" required="true" size="27" />
+                <f:verbatim><br/></f:verbatim>
+                <h:message for="userName2" styleClass="errors"/>
+                <f:verbatim><br/></f:verbatim>			
+                <p:commandButton value="Remove User" action="#{Bean.deleteUser}" icon="ui-icon-check" style="margin:0"/>
+            </h:panelGroup>           
+        </h:form>
     </ui:define>
 </ui:composition>
