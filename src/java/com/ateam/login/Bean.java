@@ -108,7 +108,7 @@ public class Bean implements Serializable {
         String status = "User Does Not Exist";
         HibernateDAO dao = (HibernateDAO) ServiceFinder.findBean("SpringHibernateDao");
 
-        com.ateam.hibernate.UserDelete user = new com.ateam.hibernate.UserDelete();
+        com.ateam.hibernate.UserAttr user = new com.ateam.hibernate.UserAttr();
         user.setUserName(getUserName());
 
         dao.deleteUser(getUserName());
