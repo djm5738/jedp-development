@@ -28,7 +28,7 @@ public class HibernateDAOImpl extends HibernateDaoSupport implements HibernateDA
 			throws DataAccessException, java.sql.SQLException {
 		UserAttr obj = null;
 		DetachedCriteria critone = DetachedCriteria.forClass(UserAttr.class);
-		critone.add(Expression.eq("userName", strUserName));
+		critone.add(Restrictions.eq("userName", strUserName));
 
 		List objs = getHibernateTemplate().findByCriteria(critone);
 		if ((objs != null) && (objs.size() > 0)) {
@@ -40,8 +40,8 @@ public class HibernateDAOImpl extends HibernateDaoSupport implements HibernateDA
 	public UserAttr validateUser(String strUserName,String password) throws DataAccessException, java.sql.SQLException {
 		UserAttr obj = null;
 		DetachedCriteria crittwo = DetachedCriteria.forClass(UserAttr.class);
-		crittwo.add(Expression.eq("userName", strUserName));
-		crittwo.add(Expression.eq("userPassword", password));
+		crittwo.add(Restrictions.eq("userName", strUserName));
+		crittwo.add(Restrictions.eq("userPassword", password));
 		List objs = getHibernateTemplate().findByCriteria(crittwo);
 		if ((objs != null) && (objs.size() > 0)) {
 			obj = (UserAttr) objs.get(0);
@@ -54,8 +54,8 @@ public class HibernateDAOImpl extends HibernateDaoSupport implements HibernateDA
 		DetachedCriteria critthree = DetachedCriteria.forClass(UserAttr.class);
                 ProjectionList pl = Projections.projectionList();
                 pl.add(Projections.groupProperty("userRole"));
-		critthree.add(Expression.eq("userName", strUserName));
-		critthree.add(Expression.eq("userPassword", password));
+		critthree.add(Restrictions.eq("userName", strUserName));
+		critthree.add(Restrictions.eq("userPassword", password));
                 critthree.setProjection(pl);
 		List objs = getHibernateTemplate().findByCriteria(critthree);
 		if ((objs != null) && (objs.size() > 0)) {
@@ -67,8 +67,8 @@ public class HibernateDAOImpl extends HibernateDaoSupport implements HibernateDA
         public List<Questions> generateQuestion(String skillId,String difficulty)throws DataAccessException, java.sql.SQLException {
             Questions obj = null;
             DetachedCriteria criteria = DetachedCriteria.forClass(Questions.class);
-            criteria.add(Expression.eq("skillId", skillId));
-            criteria.add(Expression.eq("difficulty", difficulty));
+            criteria.add(Restrictions.eq("skillId", skillId));
+            criteria.add(Restrictions.eq("difficulty", difficulty));
             criteria.add(Restrictions.sqlRestriction("1=1 order by rand() LIMIT 1"));
             List objs = getHibernateTemplate().findByCriteria(criteria);
 		if ((objs != null) && (objs.size() > 0)) {
