@@ -41,10 +41,11 @@
             </h:panelGroup>
 
             <h:outputText value="Role" styleClass="style2"/>
-            <f:verbatim><br/></f:verbatim>
             <h:panelGroup>
-                <h:inputText id="role" value="#{Bean.userRole}" size="27" required="true"/>
-                <f:verbatim><br/></f:verbatim>
+                <h:selectOneRadio value="#{Bean.userRole}">
+                    <f:selectItem itemValue="Admin" itemLabel="Administrator"/>
+                    <f:selectItem itemValue="Interviewer" itemLabel="Interviewer"/>
+                </h:selectOneRadio>
             </h:panelGroup>
 
             <h:outputText value=" "/>
@@ -90,7 +91,7 @@
                 <h:inputTextarea id="QuestionText" value="#{Questions.questionText}" required="true" cols="50" rows="5" a:maxlength="480"/>
                 <f:verbatim><br/></f:verbatim>
                 <f:verbatim><br/></f:verbatim>
-                
+
                 <!-- &#160; is the &nbsp; of Facelets - it lets us add a non-breaking space. -->
                 <h:outputText value="Associated Skill:&#160;&#160;" styleClass="style2"/>
                 <h:selectOneMenu value="#{Questions.skillId}">
