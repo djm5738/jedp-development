@@ -108,5 +108,55 @@
             length="500"
         />
     </class>
-  
+    
+    <class name="com.ateam.app.Candidates" table="candidates">
+        <id
+            name="candidateId"
+            type="java.lang.Integer"
+            column="CANDIDATE_ID"
+            length="45"
+        >
+            <generator class="increment" />
+        </id>
+
+        <property
+            name="candidateName"
+            type="java.lang.String"
+            column="NAME"
+            length="45"
+        />
+        <property
+            name="candidateResume"
+            type="java.sql.Blob"
+            column="RESUME"
+            length="10"
+        />
+        <property
+            name="submitDateResume"
+            type="java.lang.String"
+            column="RESUME_SUBMIT_DATE"
+            length="45"
+        />
+        <property
+            name="availability"
+            type="java.lang.String"
+            column="AVAILABILITY"
+            length="45"
+        />
+    </class>
+    <class name="com.ateam.app.CandidateSkills" table="candidate_skills">
+        <id
+            name="candidateId"
+            type="java.lang.Integer"
+            column="CANDIDATE_ID"
+            length="45"
+        >
+        </id>
+        <property
+            name="skillId"
+            type="java.lang.String"
+            column="SKILL_ID"
+            length="45"
+        />
+    </class>
 </hibernate-mapping>

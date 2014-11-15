@@ -35,7 +35,17 @@
         <managed-bean-class>com.ateam.app.Questions</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
-	
+    <managed-bean>
+        <managed-bean-name>Candidates</managed-bean-name>
+        <managed-bean-class>com.ateam.app.Candidates</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>CandidateSkills</managed-bean-name>
+        <managed-bean-class>com.ateam.app.CandidateSkills</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
     <navigation-rule>
         <from-view-id>login.xhtml</from-view-id>
         <navigation-case>

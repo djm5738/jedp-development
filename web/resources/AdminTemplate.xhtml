@@ -9,10 +9,10 @@
         <h:head>
             <f:facet name="first">
                 <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
-                        <style type="text/css">
-        <h:outputStylesheet name="./css/Appdefault.css"/>
-        <h:outputStylesheet name="./css/AppcssLayout.css"/>
-        </style>
+                <style type="text/css">
+                    <h:outputStylesheet name="./css/Appdefault.css"/>
+                    <h:outputStylesheet name="./css/AppcssLayout.css"/>
+                </style>
                 <title>JEDP Interview Tool - Administrator</title>
             </f:facet>
         </h:head>
@@ -31,22 +31,24 @@
                         <h:graphicImage library="images" name="Menu_Title.png" width="50%" />
                     </h:outputLink>
                     <p:menu style="width:90%; font-weight:bold; background:#036fab; color:#FFFFFF;">
-                            <p:menuitem value="Question Generator" url="AdminGenerator.xhtml" 
-                                        style="width:90%; font-weight:bold; background:#036fab; color:#FFFFFF;"/>
-                            <p:menuitem value="Create Scorecard" url="http://www.primefaces.org/documentation.html" 
-                                        style="width:90%; font-weight:bold; background:#036fab; color:#FFFFFF;"/>
-                            <p:menuitem value="Create Report" url="http://forum.primefaces.org/" 
-                                        style="width:90%; font-weight:bold; background:#036fab; color:#FFFFFF;"/>
-                            <p:menuitem value="Application Manager" url="useredit.xhtml" 
-                                        style="width:90%; font-weight:bold; background:#036fab; color:#FFFFFF;"/>
+                        <p:menuitem value="Add Candidate" url="AddCandidate.xhtml"
+                                    style="width:90%; font-weight:bold; background:#036fab; color:#FFFFFF;"/>    
+                        <p:menuitem value="Question Generator" url="AdminGenerator.xhtml" 
+                                    style="width:90%; font-weight:bold; background:#036fab; color:#FFFFFF;"/>
+                        <p:menuitem value="Create Scorecard" url="http://www.primefaces.org/documentation.html" 
+                                    style="width:90%; font-weight:bold; background:#036fab; color:#FFFFFF;"/>
+                        <p:menuitem value="Create Report" url="http://forum.primefaces.org/" 
+                                    style="width:90%; font-weight:bold; background:#036fab; color:#FFFFFF;"/>
+                        <p:menuitem value="Application Manager" url="useredit.xhtml" 
+                                    style="width:90%; font-weight:bold; background:#036fab; color:#FFFFFF;"/>
 
                     </p:menu>
                 </p:layoutUnit>
 
                 <p:layoutUnit position="center">
-                        <h:body>
-                            <ui:insert name="content" />
-                        </h:body>
+                    <h:body>
+                        <ui:insert name="content" />
+                    </h:body>
                 </p:layoutUnit>
                 <div id="footer">
                     If you have any problems or questions regarding the functionality of this application, please contact our support team admin.<br/>

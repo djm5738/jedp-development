@@ -35,4 +35,8 @@ public interface HibernateDAO {
     public List<Skills> listSkills() throws DataAccessException, java.sql.SQLException;
     
     public void addQuestion(com.ateam.app.Questions obj) throws DataAccessException;
+    
+    public void addCandidate(com.ateam.app.Candidates obj) throws DataAccessException;
+    
+    public void addCandidateSkills(com.ateam.app.CandidateSkills obj) throws DataAccessException;
 }

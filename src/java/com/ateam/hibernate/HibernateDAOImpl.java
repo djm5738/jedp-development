@@ -107,16 +107,24 @@ public class HibernateDAOImpl extends HibernateDaoSupport implements HibernateDA
     public void addSkill(com.ateam.app.Skills obj) throws DataAccessException {
         getHibernateTemplate().save(obj);
     }
-    
+
     public List<Skills> listSkills() throws DataAccessException, java.sql.SQLException {
         DetachedCriteria criteria = DetachedCriteria.forClass(Skills.class);
         criteria.setProjection(Projections.property("skillId"));
         List objs = getHibernateTemplate().findByCriteria(criteria);
-        
+
         return objs;
     }
-    
+
     public void addQuestion(com.ateam.app.Questions obj) throws DataAccessException {
+        getHibernateTemplate().save(obj);
+    }
+
+    public void addCandidate(com.ateam.app.Candidates obj) throws DataAccessException {
+        getHibernateTemplate().save(obj);
+    }
+
+    public void addCandidateSkills(com.ateam.app.CandidateSkills obj) throws DataAccessException {
         getHibernateTemplate().save(obj);
     }
 }

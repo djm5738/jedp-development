@@ -1,0 +1,38 @@
+<ui:composition template="resources/AdminTemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+    >
+    <ui:define name="content">
+        <h:form>
+            <h:outputText value="Enter Candidate Name" styleClass="style2"/>	
+            <f:verbatim><br/></f:verbatim>
+            <h:panelGroup>
+                <h:inputText id="candidateName" value="#{Candidates.candidateName}" required="true" size="27" />
+                <f:verbatim><br/></f:verbatim>
+                <h:message for="candidateName" styleClass="errors"/>
+            </h:panelGroup>
+            <f:verbatim><br/></f:verbatim>
+            <h:outputText value="Select Candidate Skills" styleClass="style2"/>
+            <f:verbatim><br/></f:verbatim>
+            <i><h:outputText value="Ctrl+Click to select multiple values" styleClass="style2"/></i>
+            <f:verbatim><br/></f:verbatim>
+            <f:verbatim><br/></f:verbatim>
+            <h:panelGroup>
+                <h:selectManyListbox value="#{Candidates.skillId}">
+                    <f:selectItems value="#{Skills.listSkills()}" itemLabel="#{Skill.skillId}" itemValue="#{Skill.skillId}" />
+                </h:selectManyListbox>
+            </h:panelGroup>
+            <f:verbatim><br/></f:verbatim>
+            <f:verbatim><br/></f:verbatim>
+            <h:panelGroup>
+                <p:commandButton value="Add Candidate" action="#{Candidates.addCandidate}" icon="ui-icon-check" style="margin:0"/>
+            </h:panelGroup>
+            <f:verbatim><br/></f:verbatim>  
+            <f:verbatim><br/></f:verbatim>
+        </h:form>
+    </ui:define>
+</ui:composition>
