@@ -61,9 +61,17 @@ public class Skills implements Serializable {
 
         com.ateam.app.Skills skill = new com.ateam.app.Skills(newSkill);
         dao.addSkill(skill);
-        setNewSkill("");
+        
+        this.unsetFields();
+        
         status = "success";
-
+        
         return status;
+    }
+    
+    public void unsetFields() {
+        this.setSkillId(null);
+        this.setSkillDesc(null);
+        this.setNewSkill(null);
     }
 }

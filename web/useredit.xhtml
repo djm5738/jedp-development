@@ -6,7 +6,7 @@
                 xmlns:p="http://primefaces.org/ui">
     >
     <ui:define name="content">
-        <f:event listener="#{Bean.unsetUserName}" type="preRenderView" />
+        
         <h:form>
             <h:outputText value="User Name" styleClass="style2"/>	
             <f:verbatim><br/></f:verbatim>
@@ -53,6 +53,7 @@
             <f:verbatim><br/></f:verbatim>  
             <f:verbatim><br/></f:verbatim>
         </h:form>
+        
         <h:form>
             <h:outputText value="Remove User by User Name" styleClass="style2"/> 
             <f:verbatim><br/></f:verbatim>
@@ -67,6 +68,7 @@
                 <f:verbatim><br/></f:verbatim>
             </h:panelGroup>
         </h:form>
+        
         <h:form>
             <h:outputText value="Add Skill" styleClass="style2"/>
             <f:verbatim><br/></f:verbatim>  
@@ -76,6 +78,7 @@
                 <h:message for="userName" styleClass="errors"/>
                 <p:commandButton value="Add Skill" action="#{Skills.addSkill}" icon="ui-icon-check" style="margin:0"/>
             </h:panelGroup>
-    </h:form>
-</ui:define>
+        </h:form>
+        
+    </ui:define>
 </ui:composition>
