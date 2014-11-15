@@ -1,97 +1,112 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-  <class name="com.ateam.hibernate.UserAttr" table="users">
-      <id
-        name="userId"
-        type="java.lang.Integer"
-        column="USER_ID"
-    >
-        <generator class="increment" />
-    </id>
+    <class name="com.ateam.hibernate.UserAttr" table="users">
+        <id
+            name="userId"
+            type="java.lang.Integer"
+            column="USER_ID"
+        >
+            <generator class="increment" />
+        </id>
 
-    <property
-        name="userName"
-        type="java.lang.String"
-        column="USER_NAME"
-        length="45"
-    />
-    <property
-        name="userPassword"
-        type="java.lang.String"
-        column="PASSWORD"
-        length="45"
-    />
-    <property
-        name="userFullName"
-        type="java.lang.String"
-        column="FULL_NAME"
-        length="45"
-    />
-    <property
-        name="userRole"
-        type="java.lang.String"
-        column="ROLE"
-        length="45"
-    />
-    <!-- Associations -->
+        <property
+            name="userName"
+            type="java.lang.String"
+            column="USER_NAME"
+            length="45"
+        />
+        <property
+            name="userPassword"
+            type="java.lang.String"
+            column="PASSWORD"
+            length="45"
+        />
+        <property
+            name="userFullName"
+            type="java.lang.String"
+            column="FULL_NAME"
+            length="45"
+        />
+        <property
+            name="userRole"
+            type="java.lang.String"
+            column="ROLE"
+            length="45"
+        />
+        <!-- Associations -->
   
 
-</class>
-<class name="com.ateam.app.Questions" table="questions">
-    <id
-        name="questionId"
-        type="java.lang.String"
-        column="QUESTION_ID"
-        length="45"
-    >
-        <generator class="increment" />
-    </id>
+    </class>
 
-    <property
-        name="questionText"
-        type="java.lang.String"
-        column="QUESTION_TEXT"
-        length="500"
-    />
-    <property
-        name="difficulty"
-        type="java.lang.String"
-        column="DIFFICULTY"
-        length="10"
-    />
-    <property
-        name="exTime"
-        type="java.lang.String"
-        column="EXPECTED_TIME"
-        length="15"
-    />
-    <property
-        name="exAnswer"
-        type="java.lang.String"
-        column="EXPECTED_ANSWER"
-        length="500"
-    />
+    <class name="com.ateam.app.Questions" table="questions">
+        <id
+            name="questionId"
+            type="java.lang.String"
+            column="QUESTION_ID"
+            length="45"
+        >
+            <generator class="increment" />
+        </id>
+
         <property
-        name="questionType"
-        type="java.lang.String"
-        column="QUESTION_TYPE"
-        length="45"
-    />
+            name="questionText"
+            type="java.lang.String"
+            column="QUESTION_TEXT"
+            length="500"
+        />
         <property
-        name="businessUnit"
-        type="java.lang.String"
-        column="BUSINESS_UNIT"
-        length="45"
-    />
-    <property
-        name="skillId"
-        type="java.lang.String"
-        column="SKILL_ID"
-        length="45"
-    />
-    <!-- Associations -->
+            name="difficulty"
+            type="java.lang.String"
+            column="DIFFICULTY"
+            length="10"
+        />
+        <property
+            name="exTime"
+            type="java.lang.String"
+            column="EXPECTED_TIME"
+            length="15"
+        />
+        <property
+            name="exAnswer"
+            type="java.lang.String"
+            column="EXPECTED_ANSWER"
+            length="500"
+        />
+        <property
+            name="questionType"
+            type="java.lang.String"
+            column="QUESTION_TYPE"
+            length="45"
+        />
+        <property
+            name="businessUnit"
+            type="java.lang.String"
+            column="BUSINESS_UNIT"
+            length="45"
+        />
+        <property
+            name="skillId"
+            type="java.lang.String"
+            column="SKILL_ID"
+            length="45"
+        />
+    </class>
+
+    <class name="com.ateam.app.Skills" table="skills">
+        <id
+            name="skillId"
+            type="java.lang.String"
+            column="SKILL_ID"
+            length="45"
+        >
+        </id>
+        <property
+            name="skillDesc"
+            type="java.lang.String"
+            column="SKILL_DESCR"
+            length="500"
+        />
+    </class>
   
-
-</class>
 </hibernate-mapping>
