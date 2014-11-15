@@ -1,13 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.ateam.app;
 
 import com.ateam.hibernate.HibernateDAO;
 import com.ateam.login.ServiceFinder;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  *
@@ -54,6 +50,12 @@ public class Skills implements Serializable {
     public String getNewSkill() {
         return this.newSkill;
     }
+       
+    public void unsetFields() {
+        this.setSkillId(null);
+        this.setSkillDesc(null);
+        this.setNewSkill(null);
+    }
 
     public String addSkill() throws Exception {
         String status = "success";
@@ -69,9 +71,9 @@ public class Skills implements Serializable {
         return status;
     }
     
-    public void unsetFields() {
-        this.setSkillId(null);
-        this.setSkillDesc(null);
-        this.setNewSkill(null);
+    public List listSkills() throws Exception {
+        HibernateDAO dao = (HibernateDAO) ServiceFinder.findBean("SpringHibernateDao");
+        List skills = dao.listSkills();
+        return skills;
     }
 }

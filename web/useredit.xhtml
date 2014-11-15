@@ -3,10 +3,11 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:p="http://primefaces.org/ui">
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     >
     <ui:define name="content">
-        
+        <b><h:outputText value="User Management" styleClass="style1"/></b>
         <h:form>
             <h:outputText value="User Name" styleClass="style2"/>	
             <f:verbatim><br/></f:verbatim>
@@ -53,7 +54,7 @@
             <f:verbatim><br/></f:verbatim>  
             <f:verbatim><br/></f:verbatim>
         </h:form>
-        
+
         <h:form>
             <h:outputText value="Remove User by User Name" styleClass="style2"/> 
             <f:verbatim><br/></f:verbatim>
@@ -61,24 +62,76 @@
                 <h:selectOneMenu value="#{Bean.userName}">
                     <f:selectItems value="#{Bean.listUsers()}" itemLabel="#{Bean.userName}" itemValue="#{Bean.userName}" />
                 </h:selectOneMenu>
-                <f:verbatim><br/></f:verbatim>	
                 <f:verbatim><br/></f:verbatim>
                 <p:commandButton value="Remove User" action="#{Bean.deleteUser}" icon="ui-icon-check" style="margin:0"/>
                 <f:verbatim><br/></f:verbatim>  
                 <f:verbatim><br/></f:verbatim>
             </h:panelGroup>
         </h:form>
-        
+
+        <b><h:outputText value="Skill Management" styleClass="style1"/></b>
         <h:form>
             <h:outputText value="Add Skill" styleClass="style2"/>
             <f:verbatim><br/></f:verbatim>  
             <h:panelGroup>
-                <h:inputText id="Skill" value="#{Skills.newSkill}" required="true" size="27" />
+                <h:inputText id="Skill" value="#{Skills.newSkill}" required="true" size="27"/>
                 <f:verbatim><br/></f:verbatim>
-                <h:message for="userName" styleClass="errors"/>
-                <p:commandButton value="Add Skill" action="#{Skills.addSkill}" icon="ui-icon-check" style="margin:0"/>
+                <p:commandButton value="Add New Skill" action="#{Skills.addSkill}" icon="ui-icon-check" style="margin:0"/>
+                <f:verbatim><br/></f:verbatim>  
+                <f:verbatim><br/></f:verbatim>
             </h:panelGroup>
         </h:form>
-        
+
+        <b><h:outputText value="Question Management" styleClass="style1"/></b>
+        <h:form>
+            <h:outputText value="Add New Question" styleClass="style2"/>
+            <f:verbatim><br/></f:verbatim>  
+            <h:panelGroup>
+                <h:inputTextarea id="QuestionText" value="#{Questions.questionText}" required="true" cols="50" rows="5" a:maxlength="480"/>
+                <f:verbatim><br/></f:verbatim>
+                <f:verbatim><br/></f:verbatim>
+                
+                <!-- &#160; is the &nbsp; of Facelets - it lets us add a non-breaking space. -->
+                <h:outputText value="Associated Skill:&#160;&#160;" styleClass="style2"/>
+                <h:selectOneMenu value="#{Questions.skillId}">
+                    <f:selectItems value="#{Skills.listSkills()}" itemLabel="#{Skill.skillId}" itemValue="#{Skill.skillId}" />
+                </h:selectOneMenu>                
+
+                <h:panelGrid columns="2"> 
+                    <h:outputText value="Difficulty:&#160;&#160;" styleClass="style2"/>
+                    <h:selectOneRadio value="#{Questions.difficulty}">
+                        <f:selectItem itemValue="1" itemLabel="1"/>
+                        <f:selectItem itemValue="2" itemLabel="2"/>
+                        <f:selectItem itemValue="3" itemLabel="3"/>
+                        <f:selectItem itemValue="4" itemLabel="4"/>
+                        <f:selectItem itemValue="5" itemLabel="5"/>
+                    </h:selectOneRadio>
+                </h:panelGrid>
+
+                <h:panelGrid columns="2"> 
+                    <h:outputText value="Expected Time (in minutes):" styleClass="style2"/>
+                    <h:selectOneRadio value="#{Questions.exTime}">
+                        <f:selectItem itemValue="10" itemLabel="10"/>
+                        <f:selectItem itemValue="20" itemLabel="20"/>
+                        <f:selectItem itemValue="30" itemLabel="30"/>
+                        <f:selectItem itemValue="40" itemLabel="40"/>
+                        <f:selectItem itemValue="50" itemLabel="50"/>
+                    </h:selectOneRadio>
+                </h:panelGrid>
+                <f:verbatim><br/></f:verbatim>
+
+                <h:outputText value="Expected Answer" styleClass="style2"/>
+                <f:verbatim><br/></f:verbatim>
+                <h:inputTextarea id="ExpectedAnswer" value="#{Questions.exAnswer}" required="false" cols="50" rows="5" a:maxlength="480"/>
+                <f:verbatim><br/></f:verbatim>
+
+                <p:commandButton value="Add New Question" action="#{Questions.addQuestion()}" icon="ui-icon-check" style="margin:0"/>
+                <f:verbatim><br/></f:verbatim>
+                <f:verbatim><br/></f:verbatim>
+                <f:verbatim><br/></f:verbatim>
+                <f:verbatim><br/></f:verbatim>
+
+            </h:panelGroup>
+        </h:form>
     </ui:define>
 </ui:composition>

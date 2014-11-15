@@ -17,21 +17,19 @@ public class UserAttr implements Serializable {
     private String userFullName;
     private String userRole;
 
-    public UserAttr(Integer userId, String userName, String userPassword, String userFullName, String userRole) {
-        this.userId = userId;
-        this.userName = userName;
-        this.userPassword = userPassword;
-        this.userFullName = userFullName;
-        this.userRole = userRole;
-    }
-
     public UserAttr() {
     }
 
     public UserAttr(Integer userId) {
         this.userId = userId;
     }
-
+    public UserAttr(String userName, String userPassword, String userFullName, String userRole) {
+        this.userName = userName;
+        this.userPassword = userPassword;
+        this.userFullName = userFullName;
+        this.userRole = userRole;
+    }
+    
     public Integer getUserId() {
         return this.userId;
     }

@@ -1,9 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.ateam.app;
+
+import com.ateam.hibernate.HibernateDAO;
+import com.ateam.login.ServiceFinder;
 import java.io.Serializable;
 
 /**
@@ -11,30 +9,30 @@ import java.io.Serializable;
  * @author agray
  */
 public class Questions implements Serializable {
-    private String skillId;
-    private String questionId;
+
+    private Integer questionId;
     private String questionText;
     private String difficulty;
     private String exTime;
     private String exAnswer;
     private String questionType;
     private String businessUnit;
+    private String skillId;
 
-    public Questions(String skillId, String questionID, String questionText, String difficulty, String exTime, String exAnswer,String questionType, String businessUnit) {
+    public Questions() {
+    }
+
+    public Questions(String skillId) {
         this.skillId = skillId;
-        this.questionId = questionID;
+    }
+
+    public Questions(String questionText, String difficulty, String exTime, String exAnswer, String questionType, String businessUnit, String skillId) {
         this.questionText = questionText;
         this.difficulty = difficulty;
         this.exTime = exTime;
         this.exAnswer = exAnswer;
         this.questionType = questionType;
         this.businessUnit = businessUnit;
-    }
-
-    public Questions () {
-    }
-
-    public Questions(String skillId) {
         this.skillId = skillId;
     }
 
@@ -45,11 +43,12 @@ public class Questions implements Serializable {
     public void setSkillId(String skillId) {
         this.skillId = skillId;
     }
-    public String getQuestionId() {
+
+    public Integer getQuestionId() {
         return this.questionId;
     }
 
-    public void setQuestionId(String questionId) {
+    public void setQuestionId(Integer questionId) {
         this.questionId = questionId;
     }
 
@@ -84,6 +83,7 @@ public class Questions implements Serializable {
     public void setexAnswer(String exAnswer) {
         this.exAnswer = exAnswer;
     }
+
     public String getquestionType() {
         return this.questionType;
     }
@@ -91,11 +91,37 @@ public class Questions implements Serializable {
     public void setquestionType(String questionType) {
         this.questionType = questionType;
     }
+
     public String getbusinessUnit() {
         return this.businessUnit;
     }
 
     public void setbusinessUnit(String businessUnit) {
         this.businessUnit = businessUnit;
+    }
+    
+    public void unsetFields() {
+        this.skillId = null;
+        this.questionId = null;
+        this.questionText = null;
+        this.difficulty = null;
+        this.exTime = null;
+        this.exAnswer = null;
+        this.questionType = null;
+        this.businessUnit = null;
+    }
+    
+    public String addQuestion() throws Exception {
+        String status = "success";
+        HibernateDAO dao = (HibernateDAO) ServiceFinder.findBean("SpringHibernateDao");
+
+        com.ateam.app.Questions question = new com.ateam.app.Questions(questionText, difficulty, exTime, exAnswer, questionType, businessUnit, skillId);
+        dao.addQuestion(question);
+        
+        this.unsetFields();
+        
+        status = "success";
+        
+        return status;
     }
 }

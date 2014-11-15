@@ -42,7 +42,7 @@
     <class name="com.ateam.app.Questions" table="questions">
         <id
             name="questionId"
-            type="java.lang.String"
+            type="java.lang.Integer"
             column="QUESTION_ID"
             length="45"
         >

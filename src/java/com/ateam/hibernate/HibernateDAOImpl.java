@@ -97,7 +97,6 @@ public class HibernateDAOImpl extends HibernateDaoSupport implements HibernateDA
     }
 
     public List<UserAttr> listUsers() throws DataAccessException, java.sql.SQLException {
-        UserAttr obj = null;
         DetachedCriteria critfour = DetachedCriteria.forClass(UserAttr.class);
         critfour.setProjection(Projections.property("userName"));
         List objs = getHibernateTemplate().findByCriteria(critfour);
@@ -106,6 +105,18 @@ public class HibernateDAOImpl extends HibernateDaoSupport implements HibernateDA
     }
 
     public void addSkill(com.ateam.app.Skills obj) throws DataAccessException {
+        getHibernateTemplate().save(obj);
+    }
+    
+    public List<Skills> listSkills() throws DataAccessException, java.sql.SQLException {
+        DetachedCriteria criteria = DetachedCriteria.forClass(Skills.class);
+        criteria.setProjection(Projections.property("skillId"));
+        List objs = getHibernateTemplate().findByCriteria(criteria);
+        
+        return objs;
+    }
+    
+    public void addQuestion(com.ateam.app.Questions obj) throws DataAccessException {
         getHibernateTemplate().save(obj);
     }
 }

@@ -77,20 +77,7 @@ public class Bean implements Serializable {
         String status = "success";
         HibernateDAO dao = (HibernateDAO) ServiceFinder.findBean("SpringHibernateDao");
 
-        com.ateam.hibernate.UserAttr user = new com.ateam.hibernate.UserAttr();
-
-        //Set user name
-        user.setUserName(getUserName());
-
-        //Set user Password
-        user.setUserPassword(getPwd());
-
-        //Set user Name
-        user.setUserFullName(getUserFullName());
-
-        //Set Address
-        user.setUserRole(getUserRole());
-
+        com.ateam.hibernate.UserAttr user = new com.ateam.hibernate.UserAttr(userName, pwd, userFullName, userRole);
         dao.addUser(user);
 
         this.unsetFields();
@@ -115,7 +102,6 @@ public class Bean implements Serializable {
 
     public List listUsers() throws Exception {
         HibernateDAO dao = (HibernateDAO) ServiceFinder.findBean("SpringHibernateDao");
-        com.ateam.hibernate.UserAttr u = new com.ateam.hibernate.UserAttr();
         List users = dao.listUsers();
         return users;
     }
