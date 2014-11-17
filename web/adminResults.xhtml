@@ -43,14 +43,30 @@
 				</f:facet>
     				#{q.exAnswer}
     		</p:column>
+    		<p:column>
+    			<f:facet name="header">
+    				Question ID
+    			</f:facet>
+    				#{q.questionId}
+    		</p:column>
     	</p:dataTable>
+        <h:form>
+        <h:outputText value="Interview ID:" styleClass="style2"/>
+        
+        <p:inputText value="#{QuestionBean.interviewId}" size="20" required="true"/>
+        <br></br>
+        <h:outputText value="Enter the Question ID Above:" styleClass="style2"/>
+        <p:inputText value="#{QuestionBean.questionId}" size="20" required="true"/>
+        <br></br>
         <h:outputText value="Enter Interview comments here" styleClass="style2"/>
                 <br></br>
-        <p:inputTextarea rows="6" style="width: 50%;" />
+
+        <p:inputTextarea rows="6" style="width: 50%;" value="#{QuestionBean.feedback}"/>
         <br></br>
-        <p:commandButton value="Submit Response" action="/successdata.xhtml" icon="ui-icon-check" style="margin:0"/>
+        <p:commandButton value="Submit Response" action="#{QuestionBean.addFeedback}" icon="ui-icon-check" style="margin:0"/>
         <br></br>
         <p:button value="Generate Another Question" outcome="AdminGenerator.xhtml" icon="ui-icon-check" style="margin:0"/>
+        </h:form>
     </h:body>
     </ui:define>
 </ui:composition>

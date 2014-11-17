@@ -159,4 +159,34 @@
             length="45"
         />
     </class>
+    
+    <class name="com.ateam.app.Questionnaire" table="interview_questionnaires">
+    <id
+        name="interviewId"
+        type="java.lang.Integer"
+        column="INTERVIEW_ID"
+        length="11"
+    >
+        <generator class="assigned"/>
+    </id>
+    <property
+        name="feedback"
+        type="java.lang.String"
+        column="FEEDBACK"
+        length="500"
+    />
+    <property
+        name="timeSpent"
+        type="java.lang.String"
+        column="TIME_SPENT_QUESTION"
+        length="45"
+    />
+    <property
+        name="questionId"
+        type="java.lang.String"
+        column="QUESTION_ID"
+        length="45"
+    />
+    </class>
+    
 </hibernate-mapping>

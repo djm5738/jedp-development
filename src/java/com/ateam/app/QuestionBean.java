@@ -28,7 +28,11 @@ public class QuestionBean implements Serializable {
     String exAnswer;
     String questionType;
     String businessUnit;
+    String feedback;
+    String questionId;
+    Integer interviewId;
     List status2;
+    List status3;
     HibernateDAO dao;
     com.ateam.app.Questions q;
 				
@@ -46,6 +50,15 @@ public class QuestionBean implements Serializable {
 	}
 	public void setExAnswer(String exAnswer){
 		this.exAnswer=exAnswer;
+	}
+        public void setFeedback(String feedback){
+		this.feedback=feedback;
+	}
+        public void setQuestionId(String questionId){
+		this.questionId=questionId;
+	}
+        public void setInterviewId(Integer interviewId){
+		this.interviewId=interviewId;
 	}
         
 	public String getSkillId(){
@@ -69,6 +82,18 @@ public class QuestionBean implements Serializable {
         public String getbusinessUnit(){
 		return businessUnit;
 	}
+        public String getFeedback(){
+		return feedback;
+	}
+        public String getQuestionId(){
+		return questionId;
+	}
+        public Integer getInterviewId(){
+		return interviewId;
+	}
+        public void unsetSkillId(){
+		this.skillId=null;
+	}
         public String generateQuestion() throws Exception {
             String status = "placeholder";
             HibernateDAO dao =(HibernateDAO)ServiceFinder.findBean("SpringHibernateDao");
@@ -90,6 +115,31 @@ public class QuestionBean implements Serializable {
             status = "adminResults";
             return status;
   }
+        
+        public String adminGenerateScorecard() throws Exception {
+            String status = "placeholder";
+            dao =(HibernateDAO)ServiceFinder.findBean("SpringHibernateDao");
+            com.ateam.app.Questionnaire s = new com.ateam.app.Questionnaire();
+            s.setInterviewId(getInterviewId());
+            status3=dao.generateScorecard(getInterviewId());
+            status = "adminResultssc";
+            return status;
+  }
+        
+        public String generateScorecard() throws Exception {
+            String status = "placeholder";
+            dao =(HibernateDAO)ServiceFinder.findBean("SpringHibernateDao");
+            com.ateam.app.Questionnaire s = new com.ateam.app.Questionnaire();
+            s.setInterviewId(getInterviewId());
+            status3=dao.generateScorecard(getInterviewId());
+            status = "resultssc";
+            return status;
+  }        
+        
+        public List scorecardReport() throws Exception{
+            return status3;
+        }        
+        
         public List questionList() throws Exception{
             return status2;
         }
@@ -99,4 +149,30 @@ public class QuestionBean implements Serializable {
             q.setDifficulty(getDifficulty());
             status2.add(dao.generateQuestion(getSkillId(),getDifficulty()));
         }
+        
+        public List listSkillsq() throws Exception {
+            HibernateDAO dao =(HibernateDAO)ServiceFinder.findBean("SpringHibernateDao");
+            com.ateam.app.Questions r = new com.ateam.app.Questions();
+            List skills = dao.listSkillsq();
+            return skills;
+  }
+        
+        public List listInterviewId() throws Exception {
+            HibernateDAO dao =(HibernateDAO)ServiceFinder.findBean("SpringHibernateDao");
+            com.ateam.app.Questionnaire t = new com.ateam.app.Questionnaire();
+            List interviewIds = dao.listInterviewId();
+            return interviewIds;
+  }    
+    
+        public String addFeedback() throws Exception {
+            String status = "placeholder";
+            HibernateDAO dao2 =(HibernateDAO)ServiceFinder.findBean("SpringHibernateDao");
+            com.ateam.app.Questionnaire s = new com.ateam.app.Questionnaire();
+            s.setFeedback(getFeedback());
+            s.setInterviewId(getInterviewId());
+            s.setQuestionId(getQuestionId());
+            dao2.addFeedback(s);
+            status = "success";
+            return status;
+  }
 }

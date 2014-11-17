@@ -23,6 +23,8 @@ public interface HibernateDAO {
     public String checkRole(String strUserName, String password) throws DataAccessException, java.sql.SQLException;
 
     public List<Questions> generateQuestion(String skillId, String difficulty) throws DataAccessException, java.sql.SQLException;
+    
+    public List<Questionnaire> generateScorecard(Integer interviewId) throws DataAccessException, java.sql.SQLException;
 
     public List<UserAttr> listUsers() throws DataAccessException, java.sql.SQLException;
 
@@ -33,6 +35,12 @@ public interface HibernateDAO {
     public void addSkill(com.ateam.app.Skills obj) throws DataAccessException;
     
     public List<Skills> listSkills() throws DataAccessException, java.sql.SQLException;
+    
+    public List<Questions> listSkillsq() throws DataAccessException, java.sql.SQLException;
+    
+    public List<Questionnaire> listInterviewId() throws DataAccessException, java.sql.SQLException;
+    
+    public void addFeedback(com.ateam.app.Questionnaire obj) throws DataAccessException;
     
     public void addQuestion(com.ateam.app.Questions obj) throws DataAccessException;
     
