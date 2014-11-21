@@ -25,7 +25,9 @@ public interface HibernateDAO {
     public List<Questions> generateQuestion(String skillId, String difficulty) throws DataAccessException, java.sql.SQLException;
     
     public List<Questionnaire> generateScorecard(Integer interviewId) throws DataAccessException, java.sql.SQLException;
-
+            
+    public Integer getUserID(String userName) throws DataAccessException, java.sql.SQLException;
+    
     public List<UserAttr> listUsers() throws DataAccessException, java.sql.SQLException;
 
     public void addUser(com.ateam.hibernate.UserAttr obj) throws DataAccessException;
@@ -47,4 +49,6 @@ public interface HibernateDAO {
     public void addCandidate(com.ateam.app.Candidates obj) throws DataAccessException;
     
     public void addCandidateSkills(com.ateam.app.CandidateSkills obj) throws DataAccessException;
+    
+    public void addInterview(com.ateam.app.Interviews obj) throws DataAccessException;
 }

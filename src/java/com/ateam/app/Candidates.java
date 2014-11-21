@@ -4,9 +4,6 @@ import com.ateam.hibernate.HibernateDAO;
 import com.ateam.login.ServiceFinder;
 import java.io.Serializable;
 import java.sql.Blob;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,6 +18,7 @@ public class Candidates implements Serializable {
     private String submitDateResume;
     private String availability;
     private List<String> skillId;
+    private Integer userId;
 
     public Candidates() {
     }
@@ -104,9 +102,14 @@ public class Candidates implements Serializable {
         for (String skill : skillId) {
             com.ateam.app.CandidateSkills candidateSkill = new com.ateam.app.CandidateSkills(candidate.candidateId, skill);
             dao.addCandidateSkills(candidateSkill);
+            candidateSkill.unsetFields();
         }
+        
+        com.ateam.app.Interviews interview = new com.ateam.app.Interviews(candidate.candidateId);
+        dao.addInterview(interview);
 
         this.unsetFields();
+        interview.unsetFields();
 
         status = "success";
 

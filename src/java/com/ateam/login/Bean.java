@@ -90,8 +90,6 @@ public class Bean implements Serializable {
 
         HibernateDAO dao = (HibernateDAO) ServiceFinder.findBean("SpringHibernateDao");
 
-        com.ateam.hibernate.UserAttr user = new com.ateam.hibernate.UserAttr();
-
         dao.deleteUser(getUserName());
         
         this.unsetFields();
@@ -105,7 +103,7 @@ public class Bean implements Serializable {
         List users = dao.listUsers();
         return users;
     }
-
+    
     private boolean validateData() {
         boolean status = true;
         MessageFactory mf = new MessageFactory();

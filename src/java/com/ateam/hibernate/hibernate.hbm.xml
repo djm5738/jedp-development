@@ -161,32 +161,72 @@
     </class>
     
     <class name="com.ateam.app.Questionnaire" table="interview_questionnaires">
-    <id
-        name="interviewId"
-        type="java.lang.Integer"
-        column="INTERVIEW_ID"
-        length="11"
-    >
-        <generator class="assigned"/>
-    </id>
-    <property
-        name="feedback"
-        type="java.lang.String"
-        column="FEEDBACK"
-        length="500"
-    />
-    <property
-        name="timeSpent"
-        type="java.lang.String"
-        column="TIME_SPENT_QUESTION"
-        length="45"
-    />
-    <property
-        name="questionId"
-        type="java.lang.String"
-        column="QUESTION_ID"
-        length="45"
-    />
+        <id
+            name="interviewId"
+            type="java.lang.Integer"
+            column="INTERVIEW_ID"
+            length="11"
+        >
+            <generator class="assigned"/>
+        </id>
+        <property
+            name="feedback"
+            type="java.lang.String"
+            column="FEEDBACK"
+            length="500"
+        />
+        <property
+            name="timeSpent"
+            type="java.lang.String"
+            column="TIME_SPENT_QUESTION"
+            length="45"
+        />
+        <property
+            name="questionId"
+            type="java.lang.String"
+            column="QUESTION_ID"
+            length="45"
+        />
     </class>
     
+    <class name="com.ateam.app.Interviews" table="interviews">
+        <id
+            name="interviewId"
+            type="java.lang.Integer"
+            column="INTERVIEW_ID"
+            length="11"
+        >
+            <generator class="increment"/>
+        </id>
+        <property
+            name="interviewDate"
+            type="java.lang.String"
+            column="INTERVIEW_DATE"
+            length="45"
+        />
+        <property
+            name="decision"
+            type="java.lang.String"
+            column="DECISION"
+            length="45"
+        />
+        <property
+            name="decisionDate"
+            type="java.lang.String"
+            column="DECISION_DATE"
+            length="45"
+        />
+        <property
+            name="candidateId"
+            type="java.lang.Integer"
+            column="CANDIDATE_ID"
+            length="5"
+        />
+        <property
+            name="userId"
+            type="java.lang.Integer"
+            column="USER_ID"
+            length="11"
+        />
+    </class>
 </hibernate-mapping>
