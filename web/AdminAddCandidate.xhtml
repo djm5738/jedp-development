@@ -20,15 +20,15 @@
             <f:verbatim><br/></f:verbatim>
             <i><h:outputText value="Ctrl+Click to select multiple values" styleClass="style2"/></i>
             <f:verbatim><br/></f:verbatim>
-            <f:verbatim><br/></f:verbatim>
             <h:panelGroup>
                 <h:selectManyListbox value="#{Candidates.skillId}">
                     <f:selectItems value="#{Skills.listSkills()}" itemLabel="#{Skill.skillId}" itemValue="#{Skill.skillId}" />
                 </h:selectManyListbox>
             </h:panelGroup>
-            <f:verbatim><br/></f:verbatim>
-            <f:verbatim><br/></f:verbatim>
+            <f:verbatim><p/></f:verbatim>
             <h:panelGroup>
+                <h:outputText value="Assign Interviewer" styleClass="style2"/>
+                <f:verbatim><br/></f:verbatim>
                 <h:selectOneMenu value="#{Candidates.userName}">
                     <f:selectItems value="#{Bean.listUsers()}" itemLabel="#{Bean.userName}" itemValue="#{Bean.userName}"/>
                 </h:selectOneMenu>
