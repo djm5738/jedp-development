@@ -21,11 +21,11 @@ public class Interviews implements Serializable {
     public Interviews() {
     }
 
-    public Interviews(Integer candidateId) throws Exception {
+    public Interviews(Integer candidateId, String userName) throws Exception {
         this.interviewDate="0000-00-00 00:00:00";
         this.candidateId=candidateId;
-        //getInterviewerID();
-        this.userId=1;
+        this.userName=userName;
+        getInterviewerID();
     }
 
     public Interviews(String interviewDate, String decision, String decisionDate, Integer candidateId, Integer userId) {
@@ -103,6 +103,6 @@ public class Interviews implements Serializable {
     
     public void getInterviewerID() throws Exception {
         HibernateDAO dao = (HibernateDAO) ServiceFinder.findBean("SpringHibernateDao");
-        userId = dao.getUserID(getUserName());
+        userId = dao.getUserID(this.userName);
     }
 }

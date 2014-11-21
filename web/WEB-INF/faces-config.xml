@@ -52,14 +52,14 @@
     </managed-bean>
 
     <navigation-rule>
-        <from-view-id>login.xhtml</from-view-id>
+        <from-view-id>/login.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>success</from-outcome>
-            <to-view-id>index.xhtml</to-view-id>
+            <to-view-id>/index.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>failure</from-outcome>
-            <to-view-id>login.xhtml</to-view-id>
+            <to-view-id>/login.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 	
