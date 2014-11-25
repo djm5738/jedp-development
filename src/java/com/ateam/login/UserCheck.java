@@ -14,52 +14,71 @@ import java.io.Serializable;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-public class UserCheck implements Serializable{
-	String userName;
-	String pwd;
-        String role;
-	boolean exist;
-        String role2;
-			
-	public void setUserName(String userName){
-		this.userName=userName;
-	}
-	public void setPwd(String pwd){
-		this.pwd=pwd;
-	}
-	public void setExist(boolean exist){
-		this.exist=exist;
-	}
+import javax.servlet.http.HttpSession;
 
-	public String getUserName(){
-		return userName;
-	}
-	public String getPwd(){
-		return pwd;
-	}
-	public boolean getExist(){
-		return exist;
-	}
-        public String getRole(){
-		return role;
-	}
-public String checkUser() throws Exception {
-    String status = "unauthorized";
+public class UserCheck implements Serializable {
+
+    String userName;
+    String pwd;
+    String role;
+    boolean exist;
     
-		HibernateDAO dao =(HibernateDAO)ServiceFinder.findBean("SpringHibernateDao");
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
-		if(dao.validateUser(getUserName(),getPwd())!=null){
-			exist=true;
-                        role2 = dao.checkRole(getUserName(),getPwd());
-                            if(role2.equals("Admin")){
-                                status = "Adminindex";
-		}else {
-                                status = "index";
+    public void setPwd(String pwd) {
+        this.pwd = pwd;
+    }
+
+    public void setExist(boolean exist) {
+        this.exist = exist;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public String getPwd() {
+        return pwd;
+    }
+
+    public boolean getExist() {
+        return exist;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public String checkUser() throws Exception {
+        String status = "unauthorized";
+
+        HibernateDAO dao = (HibernateDAO) ServiceFinder.findBean("SpringHibernateDao");
+
+        if (dao.validateUser(getUserName(), getPwd()) != null) {
+            exist = true;
+            
+            String userRole = dao.checkRole(getUserName(), getPwd());
+            String userFullName = dao.checkFullName(getUserName(), getPwd());
+            
+            initializeSession(userRole, userFullName);
+
+            if (userRole.equals("Admin")) {
+                status = "Adminindex";
+            } else {
+                status = "index";
+            }
+            exist = false;
         }
-		exist=false;
+        return status;
+    }
     
-  		
-} 
-                return status;
-}
+    public void initializeSession(String userRole, String userFullName) throws Exception {
+        FacesContext context = FacesContext.getCurrentInstance();
+            HttpSession session = (HttpSession) context.getExternalContext().getSession(true);
+            session.setAttribute("username", getUserName());
+            session.setAttribute("fullname", userFullName);
+            session.setAttribute("role", userRole);
+    }
 }

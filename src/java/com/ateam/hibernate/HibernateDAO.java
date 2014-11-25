@@ -22,12 +22,14 @@ public interface HibernateDAO {
 
     public String checkRole(String strUserName, String password) throws DataAccessException, java.sql.SQLException;
 
+    public String checkFullName(String strUserName, String password) throws DataAccessException, java.sql.SQLException;    
+
     public List<Questions> generateQuestion(String skillId, String difficulty) throws DataAccessException, java.sql.SQLException;
-    
+
     public List<Questionnaire> generateScorecard(Integer interviewId) throws DataAccessException, java.sql.SQLException;
-            
+
     public Integer getUserID(String userName) throws DataAccessException, java.sql.SQLException;
-    
+
     public List<UserAttr> listUsers() throws DataAccessException, java.sql.SQLException;
 
     public void addUser(com.ateam.hibernate.UserAttr obj) throws DataAccessException;
@@ -35,20 +37,20 @@ public interface HibernateDAO {
     public void deleteUser(String userName) throws DataAccessException;
 
     public void addSkill(com.ateam.app.Skills obj) throws DataAccessException;
-    
+
     public List<Skills> listSkills() throws DataAccessException, java.sql.SQLException;
-    
+
     public List<Questions> listSkillsq() throws DataAccessException, java.sql.SQLException;
-    
+
     public List<Questionnaire> listInterviewId() throws DataAccessException, java.sql.SQLException;
-    
+
     public void addFeedback(com.ateam.app.Questionnaire obj) throws DataAccessException;
-    
+
     public void addQuestion(com.ateam.app.Questions obj) throws DataAccessException;
-    
+
     public void addCandidate(com.ateam.app.Candidates obj) throws DataAccessException;
-    
+
     public void addCandidateSkills(com.ateam.app.CandidateSkills obj) throws DataAccessException;
-    
+
     public void addInterview(com.ateam.app.Interviews obj) throws DataAccessException;
 }

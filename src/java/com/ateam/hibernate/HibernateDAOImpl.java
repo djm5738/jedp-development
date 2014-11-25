@@ -65,6 +65,21 @@ public class HibernateDAOImpl extends HibernateDaoSupport implements HibernateDA
         }
         return obj;
     }
+    
+    public String checkFullName(String strUserName, String password) throws DataAccessException, java.sql.SQLException {
+        String obj = null;
+        DetachedCriteria criteria = DetachedCriteria.forClass(UserAttr.class);
+        ProjectionList pl = Projections.projectionList();
+        pl.add(Projections.groupProperty("userFullName"));
+        criteria.add(Restrictions.eq("userName", strUserName));
+        criteria.add(Restrictions.eq("userPassword", password));
+        criteria.setProjection(pl);
+        List objs = getHibernateTemplate().findByCriteria(criteria);
+        if ((objs != null) && (objs.size() > 0)) {
+            obj = (String) objs.get(0);
+        }
+        return obj;
+    }
 
     public List<Questions> generateQuestion(String skillId, String difficulty) throws DataAccessException, java.sql.SQLException {
         Questions obj = null;

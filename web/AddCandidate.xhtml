@@ -26,8 +26,15 @@
                     <f:selectItems value="#{Skills.listSkills()}" itemLabel="#{Skill.skillId}" itemValue="#{Skill.skillId}" />
                 </h:selectManyListbox>
             </h:panelGroup>
-            <f:verbatim><br/></f:verbatim>
-            <f:verbatim><br/></f:verbatim>
+            <f:verbatim><p/></f:verbatim>
+            <h:panelGroup>
+                <u><h:outputText value="Candidate's Interviewer" styleClass="style2"/></u>
+                <f:verbatim><br/></f:verbatim>
+                <b><h:outputText value="#{fullname} "/></b>
+                <f:verbatim>(that's you!)</f:verbatim>
+                <h:inputText value="#{Candidates.setUserName(username)}" disabled="true" rendered="false"/>
+            </h:panelGroup>
+            <f:verbatim><p/></f:verbatim>
             <h:panelGroup>
                 <p:commandButton value="Add Candidate" action="#{Candidates.addCandidate}" icon="ui-icon-check" style="margin:0"/>
             </h:panelGroup>

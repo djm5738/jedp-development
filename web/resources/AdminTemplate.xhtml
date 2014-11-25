@@ -22,7 +22,10 @@
             <p:layout fullPage="true">
 
                 <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
-                    <h:graphicImage library="images" name="App_Title.png" width="800" height="83" />
+                    <h:graphicImage library="images" name="App_Title.png" width="590" height="59" />
+                    <h:outputLink value="/jedp-development/" style="color:#FFFFFF; float:right; margin:5px">Logout</h:outputLink>
+                    <f:verbatim><br/></f:verbatim>
+                    <h:outputText value="Welcome, #{fullname}! Role: Administrator" style="color:#FFFFFF; float:right; margin:5px"/>
                 </p:layoutUnit>
 
                 <p:layoutUnit position="west" size="175" collapsible="true"
