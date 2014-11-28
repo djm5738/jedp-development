@@ -37,7 +37,7 @@ public class Candidates implements Serializable {
         this.availability = availability;
     }
 
-        public Integer getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
@@ -52,7 +52,7 @@ public class Candidates implements Serializable {
     public void setUserName(String userName) {
         this.userName = userName;
     }
-    
+
     public Integer getCandidateId() {
         return candidateId;
     }
@@ -107,6 +107,9 @@ public class Candidates implements Serializable {
         this.setSubmitDateResume(null);
         this.setAvailability(null);
         this.setSkillId(null);
+        this.setUserId(null);
+        this.setUserName(null);
+        this.setSkillId(null);
     }
 
     public String addCandidate() throws Exception {
@@ -121,7 +124,7 @@ public class Candidates implements Serializable {
             dao.addCandidateSkills(candidateSkill);
             candidateSkill.unsetFields();
         }
-        
+
         com.ateam.app.Interviews interview = new com.ateam.app.Interviews(candidate.candidateId, this.userName);
         dao.addInterview(interview);
 
@@ -133,9 +136,17 @@ public class Candidates implements Serializable {
         return status;
     }
 
-    public List listSkills() throws Exception {
+    public List listCandidates() throws Exception {
         HibernateDAO dao = (HibernateDAO) ServiceFinder.findBean("SpringHibernateDao");
-        List skills = dao.listSkills();
-        return skills;
+        List candidates = dao.listCandidates();
+        this.unsetFields();
+        return candidates;
+    }
+
+    public List listCandidatesOfInterviewer(Integer interviewerUserId) throws Exception {
+        HibernateDAO dao = (HibernateDAO) ServiceFinder.findBean("SpringHibernateDao");
+        List candidates = dao.listCandidatesOfInterviewer(interviewerUserId);
+        this.unsetFields();
+        return candidates;
     }
 }

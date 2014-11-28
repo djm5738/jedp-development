@@ -8,10 +8,20 @@
     <ui:define name="content">                  
         <h:form target="_blank">
             <h:panelGroup>
+                <h:outputText value="Select Candidate:" styleClass="style2"/>
+                <br/>
+                <h:selectOneMenu id="CandidateMenu" value="#{QuestionBean.candidateName}">
+                    <f:selectItems value="#{Candidates.listCandidatesOfInterviewer(userid)}" itemLabel="#{Candidates.candidateName}" itemValue="#{Candidates.candidateName}"/>
+                    <p:ajax event="change" update="SkillMenu" immediate="false" listener="#{CandidateSkills.listCandidateSkills(QuestionBean.candidateName)}"/>
+                </h:selectOneMenu>
+                <f:verbatim><br/></f:verbatim>
+            </h:panelGroup>
+            <br/>
+            <h:panelGroup>
                 <h:outputText value="Enter Skill:" styleClass="style2"/>
                 <br/>
-                <h:selectOneMenu value="#{QuestionBean.skillId}">
-                    <f:selectItems value="#{Skills.listSkills()}" itemLabel="#{Skill.skillId}" itemValue="#{Skill.skillId}" />
+                <h:selectOneMenu id="SkillMenu" value="#{QuestionBean.skillId}">
+                    <f:selectItems value="#{CandidateSkills.skillList}" itemLabel="#{CandidateSkills.skillId}" itemValue="#{CandidateSkills.skillId}" />
                 </h:selectOneMenu> 
                 <f:verbatim><br/></f:verbatim>
                 <h:message for="skillId" styleClass="errors"/>

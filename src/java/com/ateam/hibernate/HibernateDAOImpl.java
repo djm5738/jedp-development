@@ -65,7 +65,7 @@ public class HibernateDAOImpl extends HibernateDaoSupport implements HibernateDA
         }
         return obj;
     }
-    
+
     public String checkFullName(String strUserName, String password) throws DataAccessException, java.sql.SQLException {
         String obj = null;
         DetachedCriteria criteria = DetachedCriteria.forClass(UserAttr.class);
@@ -93,7 +93,7 @@ public class HibernateDAOImpl extends HibernateDaoSupport implements HibernateDA
         }
         return objs;
     }
-    
+
     public List<Questionnaire> generateScorecard(Integer interviewId) throws DataAccessException, java.sql.SQLException {
         Questionnaire obj = null;
         DetachedCriteria criteria = DetachedCriteria.forClass(Questionnaire.class);
@@ -120,7 +120,7 @@ public class HibernateDAOImpl extends HibernateDaoSupport implements HibernateDA
         }
 
     }
-    
+
     public Integer getUserID(String userName) throws DataAccessException, java.sql.SQLException {
         Integer obj = null;
         DetachedCriteria criteria = DetachedCriteria.forClass(UserAttr.class);
@@ -130,10 +130,10 @@ public class HibernateDAOImpl extends HibernateDaoSupport implements HibernateDA
         if ((objs != null) && (objs.size() > 0)) {
             obj = (Integer) objs.get(0);
         }
-        
+
         return obj;
     }
-    
+
     public List<UserAttr> listUsers() throws DataAccessException, java.sql.SQLException {
         DetachedCriteria criteria = DetachedCriteria.forClass(UserAttr.class);
         criteria.setProjection(Projections.property("userName"));
@@ -153,24 +153,25 @@ public class HibernateDAOImpl extends HibernateDaoSupport implements HibernateDA
 
         return objs;
     }
-    
+
     public List<Questions> listSkillsq() throws DataAccessException, java.sql.SQLException {
         DetachedCriteria criteria = DetachedCriteria.forClass(Questions.class);
         criteria.setProjection(Projections.distinct(Projections.property("skillId")));
         List objs = getHibernateTemplate().findByCriteria(criteria);
-            return objs;
-	}
-    
+        return objs;
+    }
+
     public List<Questionnaire> listInterviewId() throws DataAccessException, java.sql.SQLException {
         DetachedCriteria criteria = DetachedCriteria.forClass(Questionnaire.class);
         criteria.setProjection(Projections.distinct(Projections.property("interviewId")));
         List objs = getHibernateTemplate().findByCriteria(criteria);
-            return objs;
-	}
-    
+        return objs;
+    }
+
     public void addFeedback(com.ateam.app.Questionnaire obj) throws DataAccessException {
         getHibernateTemplate().save(obj);
     }
+
     public void addQuestion(com.ateam.app.Questions obj) throws DataAccessException {
         getHibernateTemplate().save(obj);
     }
@@ -182,7 +183,64 @@ public class HibernateDAOImpl extends HibernateDaoSupport implements HibernateDA
     public void addCandidateSkills(com.ateam.app.CandidateSkills obj) throws DataAccessException {
         getHibernateTemplate().save(obj);
     }
+
+    public List<Candidates> listCandidates() throws DataAccessException, java.sql.SQLException {
+        DetachedCriteria criteria = DetachedCriteria.forClass(Candidates.class);
+        criteria.setProjection(Projections.property("candidateName"));
+        List objs = getHibernateTemplate().findByCriteria(criteria);
+        
+        objs.add(0, "[Select Any Candidate]");
+        return objs;
+    }
     
+    public List<Candidates> listCandidatesOfInterviewer(Integer userId) throws DataAccessException, java.sql.SQLException {
+        DetachedCriteria interviewCriteria = DetachedCriteria.forClass(Interviews.class);
+
+        interviewCriteria.setProjection(Projections.property("candidateId"));
+        interviewCriteria.add(Restrictions.eq("userId", userId));
+
+        List objs = getHibernateTemplate().findByCriteria(interviewCriteria);
+
+        List candidateNames = new ArrayList();
+        candidateNames.add("[Select Your Candidate]");
+
+        for (Object obj : objs) {
+            DetachedCriteria candidateCriteria = DetachedCriteria.forClass(Candidates.class);
+            candidateCriteria.setProjection(Projections.property("candidateName"));
+            candidateCriteria.add(Restrictions.eq("candidateId", obj));
+            
+            List name = getHibernateTemplate().findByCriteria(candidateCriteria);
+            
+            String candidateName = (String) name.get(0);
+            
+            candidateNames.add(candidateName);
+        }
+
+        return candidateNames;
+    }
+
+    public List<Candidates> listCandidateSkills(Integer candidateId) throws DataAccessException, java.sql.SQLException {
+        DetachedCriteria criteria = DetachedCriteria.forClass(CandidateSkills.class);
+        criteria.setProjection(Projections.property("skillId"));
+        criteria.add(Restrictions.eq("candidateId", candidateId));
+        List objs = getHibernateTemplate().findByCriteria(criteria);
+
+        return objs;
+    }
+
+    public Integer getCandidateID(String candidateName) throws DataAccessException, java.sql.SQLException {
+        Integer obj = null;
+        DetachedCriteria criteria = DetachedCriteria.forClass(Candidates.class);
+        criteria.add(Restrictions.eq("candidateName", candidateName));
+        criteria.setProjection(Projections.property("candidateId"));
+        List objs = getHibernateTemplate().findByCriteria(criteria);
+        if ((objs != null) && (objs.size() > 0)) {
+            obj = (Integer) objs.get(0);
+        }
+
+        return obj;
+    }
+        
     public void addInterview(com.ateam.app.Interviews obj) throws DataAccessException {
         getHibernateTemplate().save(obj);
     }
