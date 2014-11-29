@@ -109,15 +109,19 @@ public class HibernateDAOImpl extends HibernateDaoSupport implements HibernateDA
         getHibernateTemplate().save(obj);
     }
 
-    public void deleteUser(String userName) throws DataAccessException {
-        UserAttr obj = null;
-        DetachedCriteria criteria = DetachedCriteria.forClass(UserAttr.class);
-        criteria.add(Restrictions.eq("userName", userName));
-        List objs = getHibernateTemplate().findByCriteria(criteria);
-        if ((objs != null) && (objs.size() > 0)) {
-            obj = (UserAttr) objs.get(0);
-            getHibernateTemplate().delete(obj);
+    public void deleteUser(String userName) throws DataAccessException, java.sql.SQLException {
+     
+        DetachedCriteria interviewCriteria = DetachedCriteria.forClass(Interviews.class);
+        interviewCriteria.add(Restrictions.eq("userId", getUserID(userName)));
+        List objs = getHibernateTemplate().findByCriteria(interviewCriteria);
+        for (Object interview : objs) {  
+            getHibernateTemplate().delete(interview);
         }
+        
+        DetachedCriteria userCriteria = DetachedCriteria.forClass(UserAttr.class);
+        userCriteria.add(Restrictions.eq("userName", userName));
+        objs = getHibernateTemplate().findByCriteria(userCriteria);
+        getHibernateTemplate().delete(objs.get(0));
 
     }
 

@@ -34,7 +34,7 @@ public interface HibernateDAO {
 
     public void addUser(com.ateam.hibernate.UserAttr obj) throws DataAccessException;
 
-    public void deleteUser(String userName) throws DataAccessException;
+    public void deleteUser(String userName) throws DataAccessException, java.sql.SQLException;
 
     public void addSkill(com.ateam.app.Skills obj) throws DataAccessException;
 
