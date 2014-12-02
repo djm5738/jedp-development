@@ -1,0 +1,21 @@
+<ui:composition template="resources/AdminTemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+    >
+    <ui:define name="content">
+        <h:form target="_blank">
+            <h:panelGroup>
+        <h:outputText value="Interview ID" styleClass="style2"/>
+        <h:selectOneMenu value="#{QuestionBean.interviewId}">
+            <f:selectItems value="#{QuestionBean.listInterviewId()}" itemLabel="#{QuestionBean.interviewId}" itemValue="#{QuestionBean.interviewId}" />
+        </h:selectOneMenu>
+        </h:panelGroup>
+            <h:panelGroup>
+                <p:commandButton value="Generate Scorecard" action="#{QuestionBean.adminGenerateScorecard}" onclick="this.form.target = '_blank'" icon="ui-icon-check" style="margin:0"/>
+            </h:panelGroup>
+        </h:form>
+    </ui:define>
+</ui:composition>

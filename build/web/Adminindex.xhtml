@@ -1,0 +1,22 @@
+<ui:composition template="resources/AdminTemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+    >
+    <ui:define name="content">
+        <h:panelGroup>
+            <p:commandButton id="HelpButton1" onclick="window.alert('Please choose an option from the menu on the left.')" icon="ui-icon-help"  style="float:right; margin:10px;"/>
+            <p:tooltip for="HelpButton1" value="Please choose an option from the menu on the left." showEvent="mouseover" hideEvent="mouseout" style="margin:0;"/> 
+
+            <!-- Open the tooltip tag and use these lines for styling text or breaking up text into chunks (example shown).
+                       <h:outputText value="This is the first instruction, and is fairly longwinded in explaining how to help a user with a function." escape="false"/>
+                       <f:verbatim><br/></f:verbatim>
+                       <h:outputText value="This second instruction is shorter." escape="false"/>
+            </p:tooltip>--> 
+
+        </h:panelGroup>
+        Welcome to the JEDP Interview Tool!
+    </ui:define>
+</ui:composition>

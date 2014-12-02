@@ -1,0 +1,69 @@
+<ui:composition template="resources/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+    >
+    <ui:define name="content">
+        <h1>Question Generator Results</h1>
+        <h:body>
+            <p:dataTable id="qs" value="#{QuestionBean.questionList()}" var="q" style="width: 100%">
+
+                <p:column>
+                    <f:facet name="header">
+                        Skill ID
+                    </f:facet>
+                    #{q.skillId}
+                </p:column>
+
+                <p:column>
+                    <f:facet name="header">
+                        Question Text
+                    </f:facet>
+                    #{q.questionText}
+                </p:column>
+
+                <p:column>
+                    <f:facet name="header">
+                        Difficulty
+                    </f:facet>
+                    #{q.difficulty}
+                </p:column>
+
+                <p:column>
+                    <f:facet name="header">
+                        Expected Time
+                    </f:facet>
+                    #{q.exTime}
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        Expected Answer
+                    </f:facet>
+                    #{q.exAnswer}
+                </p:column>
+            </p:dataTable>
+            <p/>
+            <h:form>
+                <h:outputText value="Did Candidate Answer Correctly?" styleClass="style2"/>
+                <br/>
+                <h:selectOneMenu value="#{QuestionBean.feedbackStarter}" required="true">
+                    <f:selectItem itemValue="#{null}" itemLabel="[Select Correctness]"  noSelectionOption="true"/>
+                    <f:selectItem itemValue="Correct. " itemLabel="Correct" />
+                    <f:selectItem itemValue="Partially Correct. " itemLabel="Partially Correct" />
+                    <f:selectItem itemValue="Incorrect. " itemLabel="Incorrect" />
+                </h:selectOneMenu>
+                <p/>
+                <h:outputText value="Enter Interview comments here" styleClass="style2"/>
+                <br/>
+                <p:inputTextarea rows="6" style="width: 50%;" value="#{QuestionBean.feedback}"/>
+                <br/>
+                <p:commandButton value="Submit Response" action="#{QuestionBean.addFeedback}" icon="ui-icon-check" style="margin:0"/>
+                <br/>
+                <p:button value="Generate Another Question" outcome="generator.xhtml" icon="ui-icon-check" style="margin:0"/>
+            </h:form>
+        </h:body>
+    </ui:define>
+</ui:composition>
+

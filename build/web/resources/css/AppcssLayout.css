@@ -1,0 +1,100 @@
+
+#top .ui-north, .ui-north .ui-layout, .ui-north .ui-layout-bd, .ui-north .ui-layout-unit, .ui-layout-north .ui-layout-unit-content{
+    position: relative;
+    color: #036fab;
+    background-color: #036fab;
+}
+
+#left .ui-west, .ui-west .ui-layout, .ui-west .ui-layout-bd, .ui-west .ui-layout-unit, .ui-layout-west .ui-layout-unit-content, .ui-layout-unit-header, .ui-widget-header{
+    position: relative;
+    color: #036fab;
+    background-color: #036fab;
+}
+
+.ui-layout-unit-header-title{
+        color: #FA8329;
+    background-color: #036fab;
+}
+
+      .Menu_Title
+        {
+         background:url('/resources/images/Menu_Title.png') no-repeat !important;
+         width:20px;
+         height:20px;
+        }
+#bottom .ui-south, .ui-south .ui-layout, .ui-south .ui-layout-bd, .ui-south .ui-layout-unit, .ui-layout-south .ui-layout-unit-content {
+    position: relative;
+    background-color: #c2dfef;
+    padding: 5px;
+    margin: 10px 0px 0px 0px;
+}
+
+#header {
+   text-align: left;
+   position: absolute;
+   float: right;
+   margin: 0px 50px 0px 200px;
+   bottom:0;
+   width:100%;
+   height:40px;   /* Height of the footer */
+   color: #000000;
+   background:#FFFFFF;
+}
+
+#footer {
+   text-align: left;
+   position: absolute;
+   float: right;
+   margin: 0px 50px 0px 200px;
+   bottom:0;
+   width:100%;
+   height:40px;   /* Height of the footer */
+   color: #000000;
+   background:#FFFFFF;
+}
+
+#left {
+    float: left;
+    background-color: #036fab;
+    padding: 5px;
+    width: 150px;
+}
+
+#right {
+    float: right;
+    background-color: #ece3a5;
+    padding: 5px;
+    width: 150px;
+}
+
+.center_content {
+    width: 900px;
+    position: relative;
+    background-color: #036fab;
+    padding: 5px;
+}
+
+.left_content {
+    background-color: #036fab;
+    padding: 5px;
+    margin-left: 170px;
+}
+
+.right_content {
+    background-color: #dddddd;
+    padding: 5px;
+    margin: 0px 170px 0px 170px;
+}
+
+#top a:link, #top a:visited {
+  color: white;
+  font-weight : bold;
+  text-decoration: none;
+}
+
+#top a:link:hover, #top a:visited:hover  {
+  color: black;
+  font-weight : bold;
+  text-decoration : underline;
+}
+

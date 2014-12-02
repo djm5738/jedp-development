@@ -1,0 +1,29 @@
+<ui:composition template="resources/template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+>
+    <ui:define name="content">
+        <h1> Interview Scorecard</h1>
+            <h:body>
+ 		<p:dataTable id="qs" value="#{QuestionBean.scorecardReport()}" var="q" style="width: 100%">
+ 
+    		<p:column>
+    			<f:facet name="header">
+    				Question ID
+    			</f:facet>
+    				#{q.questionId}
+    		</p:column>
+    		<p:column>
+    			<f:facet name="header">
+    				Feedback
+    			</f:facet>
+    				#{q.feedback}
+    		</p:column>
+ 
+    	</p:dataTable>
+    </h:body>
+    </ui:define>
+</ui:composition>

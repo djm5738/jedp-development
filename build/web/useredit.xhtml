@@ -1,0 +1,142 @@
+<ui:composition template="resources/AdminTemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+    >
+    <ui:define name="content">
+        <b><h2><h:outputText value="User Management" style="color: #fa8329" styleClass="style2"/></h2></b>
+        <h:form>
+            <b><i><h:outputText value="Add User" styleClass="style1"/></i></b>
+            <f:verbatim><p/></f:verbatim>
+            <h:outputText value="User Name" styleClass="style2"/>	
+            <h:panelGroup  style="padding-left:4.35em">
+                <h:inputText id="userName" value="#{Bean.userName}" required="true" size="27"/>
+                <h:message for="userName" styleClass="errors"/>
+            </h:panelGroup>
+
+            <f:verbatim><p/></f:verbatim>
+            <h:outputText value="Password" styleClass="style2"/>
+            <h:panelGroup style="padding-left:5em">
+                <h:inputSecret id="Password" value="#{Bean.pwd}" size="27" redisplay="true" required="true"/>
+                <h:message for="Password" styleClass="errors" />
+            </h:panelGroup>
+
+            <f:verbatim><p/></f:verbatim>
+            <h:outputText value="Confirm Password" styleClass="style2"/>
+            <h:panelGroup style="padding-left:1.25em">
+                <h:inputSecret id="confirmPassword" value="#{Bean.confPwd}" size="27" redisplay="true" required="true"/>
+                <h:message for="confirmPassword" styleClass="errors" />
+            </h:panelGroup>
+
+            <f:verbatim><p/></f:verbatim>
+            <h:outputText value="Full Name" styleClass="style2"/>
+            <h:panelGroup style="padding-left:4.9em">
+                <h:inputText id="FullName" value="#{Bean.userFullName}" size="27" required="true"/>
+            </h:panelGroup>
+
+            <f:verbatim><p/></f:verbatim>
+            <h:panelGrid columns="2">
+                <h:outputText value="Role" styleClass="style2"  style="padding-right:6.5em"/>
+                <h:selectOneRadio id="Role" value="#{Bean.userRole}">
+                    <f:selectItem itemValue="Admin" itemLabel="Administrator"/>
+                    <f:selectItem itemValue="Interviewer" itemLabel="Interviewer"/>
+                </h:selectOneRadio>
+            </h:panelGrid>
+
+            <f:verbatim><p/></f:verbatim>
+            <h:panelGroup>
+                <p:commandButton value="Add User" action="#{Bean.newUser}" icon="ui-icon-check" style="padding-left:17.5em; margin:0; color:#156BB0;"/>
+            </h:panelGroup>
+            <f:verbatim><br/></f:verbatim>
+        </h:form>
+
+        <f:verbatim><br/></f:verbatim>
+
+        <h:form>
+            <b><i><h:outputText value="Remove Existing User" styleClass="style2"/></i></b>
+            <f:verbatim><p/></f:verbatim>
+            <h:outputText value="User's Full Name" styleClass="style2"/>
+            <h:panelGroup style="padding-left:4.35em">
+                <h:selectOneMenu value="#{Bean.userFullName}">
+                    <f:selectItems value="#{Bean.listUsers()}" itemLabel="#{Bean.userName}" itemValue="#{Bean.userName}" />
+                </h:selectOneMenu>
+                <f:verbatim><p/></f:verbatim>
+                <p:commandButton value="Remove User" action="#{Bean.deleteUser}" icon="ui-icon-check" style="padding-left:15.7em; margin:0; color:#156BB0;"/>
+                <f:verbatim><p/></f:verbatim>
+            </h:panelGroup>
+        </h:form>
+
+        <f:verbatim><p/></f:verbatim>
+        <f:verbatim><hr width="25%" align="left" style="border-color:#fa8329; background-color:#fa8329; height:3pt"/></f:verbatim>
+
+        <b><h2><h:outputText value="Skill Management" style="color: #fa8329" styleClass="style2"/></h2></b>
+        <h:form>
+            <b><i><h:outputText value="Add Skill" styleClass="style2"/></i></b>
+            <f:verbatim><p/></f:verbatim>
+            <h:outputText value="Skill Name" styleClass="style2"/>
+            <h:panelGroup style="padding-left:4.5em">
+                <h:inputText id="Skill" value="#{Skills.newSkill}" required="true" size="27"/>
+                <f:verbatim><p/></f:verbatim>
+                <p:commandButton value="Add New Skill" action="#{Skills.addSkill}" icon="ui-icon-check" style="padding-left:15.5em; margin:0; color:#156BB0;"/>
+            </h:panelGroup>
+        </h:form>
+        
+        <f:verbatim><p/></f:verbatim>
+        <f:verbatim><hr width="25%" align="left" style="border-color:#fa8329; background-color:#fa8329; height:3pt"/></f:verbatim>
+
+        <b><h2><h:outputText value="Question Management" style="color: #fa8329" styleClass="style2"/></h2></b>
+        <h:form>
+            <b><i><h:outputText value="Add New Question" styleClass="style2"/></i></b>
+            <f:verbatim><p/></f:verbatim>  
+            <h:outputText value="New Question Text" styleClass="style2"/>
+            <f:verbatim><br/></f:verbatim> 
+            <h:panelGroup>
+                <h:inputTextarea id="QuestionText" value="#{Questions.questionText}" required="true" cols="45" rows="5" a:maxlength="480"/>
+                <f:verbatim><p/></f:verbatim>
+
+                <h:outputText value="Associated Skill" style="padding-right:6.3em" styleClass="style2"/>
+                <h:selectOneMenu value="#{Questions.skillId}">
+                    <f:selectItems value="#{Skills.listSkills()}" itemLabel="#{Skill.skillId}" itemValue="#{Skill.skillId}" />
+                </h:selectOneMenu>                
+
+                <h:panelGrid columns="2"> 
+                    <h:outputText value="Difficulty" style="padding-right:8.4em" styleClass="style2"/>
+                    <h:selectOneRadio value="#{Questions.difficulty}">
+                        <f:selectItem itemValue="1" itemLabel="1"/>
+                        <f:selectItem itemValue="2" itemLabel="2"/>
+                        <f:selectItem itemValue="3" itemLabel="3"/>
+                        <f:selectItem itemValue="4" itemLabel="4"/>
+                        <f:selectItem itemValue="5" itemLabel="5"/>
+                    </h:selectOneRadio>
+                </h:panelGrid>
+
+                <h:panelGrid columns="2"> 
+                    <h:outputText value="Expected Time (in minutes)" styleClass="style2"/>
+                    <h:selectOneRadio value="#{Questions.exTime}">
+                        <f:selectItem itemValue="10" itemLabel="10"/>
+                        <f:selectItem itemValue="20" itemLabel="20"/>
+                        <f:selectItem itemValue="30" itemLabel="30"/>
+                        <f:selectItem itemValue="40" itemLabel="40"/>
+                        <f:selectItem itemValue="50" itemLabel="50"/>
+                    </h:selectOneRadio>
+                </h:panelGrid>
+                <f:verbatim><br/></f:verbatim>
+
+                <h:outputText value="Expected Answer" styleClass="style2"/>
+                <f:verbatim><br/></f:verbatim>
+                <h:inputTextarea id="ExpectedAnswer" value="#{Questions.exAnswer}" required="false" cols="45" rows="5" a:maxlength="480"/>
+                <f:verbatim><p/></f:verbatim>
+
+                <p:commandButton value="Add New Question" action="#{Questions.addQuestion()}" icon="ui-icon-check" style="padding-left:14em; margin:0; color:#156BB0;"/>
+                <f:verbatim><br/></f:verbatim>
+                <f:verbatim><br/></f:verbatim>
+                <f:verbatim><br/></f:verbatim>
+                <f:verbatim><br/></f:verbatim>
+
+            </h:panelGroup>
+        </h:form>
+    </ui:define>
+</ui:composition>

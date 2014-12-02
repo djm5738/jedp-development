@@ -1,0 +1,45 @@
+<ui:composition template="resources/AdminTemplate.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+    >
+    <ui:define name="content">
+        <h:form target="_blank">
+            <h:panelGroup>
+                <h:outputText value="Select Candidate:" styleClass="style2"/>
+                <br/>
+                <h:selectOneMenu id="CandidateMenu" value="#{QuestionBean.candidateName}" required="true" hideNoSelectionOption="true">
+                    <f:selectItem itemValue="#{null}" itemLabel="[Select Your Candidate]"  noSelectionOption="true"/>
+                    <f:selectItems value="#{Candidates.listCandidatesOfInterviewer(userid)}" itemLabel="#{Candidates.candidateName}" itemValue="#{Candidates.candidateName}"/>
+                    <p:ajax event="change" update="SkillMenu" immediate="false" listener="#{CandidateSkills.listCandidateSkills(QuestionBean.candidateName)}"/>
+                </h:selectOneMenu>
+                <f:verbatim><br/></f:verbatim>
+            </h:panelGroup>
+            <br/>
+            <h:panelGroup>
+                <h:outputText value="Enter Skill:" styleClass="style2"/>
+                <br/>
+                <h:selectOneMenu id="SkillMenu" value="#{QuestionBean.skillId}" required="true">
+                    <f:selectItems value="#{CandidateSkills.skillList}" itemLabel="#{CandidateSkills.skillId}" itemValue="#{CandidateSkills.skillId}" />
+                </h:selectOneMenu> 
+                <f:verbatim><br/></f:verbatim>
+                <h:message for="skillId" styleClass="errors"/>
+            </h:panelGroup>
+            <br/>
+            <h:outputText value="Desired Difficulty:" styleClass="style2"/>
+            <h:selectOneRadio id="difficulty" value="#{QuestionBean.difficulty}" required="true">
+                <f:selectItem itemValue="1" itemLabel="1"/>   
+                <f:selectItem itemValue="2" itemLabel="2"/>   
+                <f:selectItem itemValue="3" itemLabel="3"/>
+                <f:selectItem itemValue="4" itemLabel="4"/>  
+                <f:selectItem itemValue="5" itemLabel="5"/>  
+            </h:selectOneRadio>
+            <h:panelGroup>
+                <p:commandButton value="Generate Question" action="#{QuestionBean.adminGenerateQuestion}" onclick="this.form.target = '_blank'" icon="ui-icon-check" style="margin:0"/>
+            </h:panelGroup>
+        </h:form>
+    </ui:define>
+</ui:composition>
+
