@@ -11,12 +11,12 @@ import java.io.Serializable;
  * @author Andrew
  */
 public class Questionnaire {
-    private String questionId;
+    private Integer questionId;
     private String feedback;
     private String timeSpent;
     private Integer interviewId; 
     
-public Questionnaire(String questionId, String feedback, String timeSpent, Integer interviewId) {
+public Questionnaire(Integer questionId, String feedback, String timeSpent, Integer interviewId) {
         this.feedback = feedback;
         this.questionId = questionId;
         this.timeSpent = timeSpent;
@@ -26,15 +26,15 @@ public Questionnaire(String questionId, String feedback, String timeSpent, Integ
     public Questionnaire () {
     }
     
-    public Questionnaire(String questionId) {
+    public Questionnaire(Integer questionId) {
         this.questionId = questionId;
     }
     
-    public String getQuestionId() {
+    public Integer getQuestionId() {
         return this.questionId;
     }
 
-    public void setQuestionId(String questionId) {
+    public void setQuestionId(Integer questionId) {
         this.questionId = questionId;
     }
     

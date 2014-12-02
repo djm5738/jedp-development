@@ -22,7 +22,7 @@ public class UserCheck implements Serializable {
     String pwd;
     String role;
     boolean exist;
-    
+
     public void setUserName(String userName) {
         this.userName = userName;
     }
@@ -58,12 +58,12 @@ public class UserCheck implements Serializable {
 
         if (dao.validateUser(getUserName(), getPwd()) != null) {
             exist = true;
-            
+
             String sessionUserName = getUserName();
             String userRole = dao.checkRole(getUserName(), getPwd());
             String userFullName = dao.checkFullName(getUserName(), getPwd());
             Integer userId = dao.getUserID(getUserName());
-            
+
             initializeSession(sessionUserName, userRole, userFullName, userId);
 
             if (userRole.equals("Admin")) {
@@ -75,13 +75,13 @@ public class UserCheck implements Serializable {
         }
         return status;
     }
-    
+
     public void initializeSession(String userName, String userRole, String userFullName, Integer userId) throws Exception {
         FacesContext context = FacesContext.getCurrentInstance();
-            HttpSession session = (HttpSession) context.getExternalContext().getSession(true);
-            session.setAttribute("username", userName);
-            session.setAttribute("fullname", userFullName);
-            session.setAttribute("role", userRole);
-            session.setAttribute("userid", userId);
+        HttpSession session = (HttpSession) context.getExternalContext().getSession(true);
+        session.setAttribute("username", userName);
+        session.setAttribute("fullname", userFullName);
+        session.setAttribute("role", userRole);
+        session.setAttribute("userid", userId);
     }
 }

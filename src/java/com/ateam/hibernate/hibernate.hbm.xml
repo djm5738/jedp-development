@@ -183,7 +183,7 @@
         />
         <property
             name="questionId"
-            type="java.lang.String"
+            type="java.lang.Integer"
             column="QUESTION_ID"
             length="45"
         />

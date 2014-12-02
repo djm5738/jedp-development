@@ -6,13 +6,13 @@
                 xmlns:p="http://primefaces.org/ui">
     >
     <ui:define name="content">
-        <f:event listener="#{QuestionBean.unsetSkillId}" type="preRenderView" />
         <h:form target="_blank">
             <h:panelGroup>
                 <h:outputText value="Select Candidate:" styleClass="style2"/>
                 <br/>
-                <h:selectOneMenu id="CandidateMenu" value="#{QuestionBean.candidateName}">
-                    <f:selectItems value="#{Candidates.listCandidates()}" itemLabel="#{Candidates.candidateName}" itemValue="#{Candidates.candidateName}"/>
+                <h:selectOneMenu id="CandidateMenu" value="#{QuestionBean.candidateName}" required="true" hideNoSelectionOption="true">
+                    <f:selectItem itemValue="#{null}" itemLabel="[Select Your Candidate]"  noSelectionOption="true"/>
+                    <f:selectItems value="#{Candidates.listCandidatesOfInterviewer(userid)}" itemLabel="#{Candidates.candidateName}" itemValue="#{Candidates.candidateName}"/>
                     <p:ajax event="change" update="SkillMenu" immediate="false" listener="#{CandidateSkills.listCandidateSkills(QuestionBean.candidateName)}"/>
                 </h:selectOneMenu>
                 <f:verbatim><br/></f:verbatim>
@@ -21,7 +21,7 @@
             <h:panelGroup>
                 <h:outputText value="Enter Skill:" styleClass="style2"/>
                 <br/>
-                <h:selectOneMenu id="SkillMenu" value="#{QuestionBean.skillId}">
+                <h:selectOneMenu id="SkillMenu" value="#{QuestionBean.skillId}" required="true">
                     <f:selectItems value="#{CandidateSkills.skillList}" itemLabel="#{CandidateSkills.skillId}" itemValue="#{CandidateSkills.skillId}" />
                 </h:selectOneMenu> 
                 <f:verbatim><br/></f:verbatim>
@@ -29,7 +29,7 @@
             </h:panelGroup>
             <br/>
             <h:outputText value="Desired Difficulty:" styleClass="style2"/>
-            <h:selectOneRadio id="difficulty" value="#{QuestionBean.difficulty}">
+            <h:selectOneRadio id="difficulty" value="#{QuestionBean.difficulty}" required="true">
                 <f:selectItem itemValue="1" itemLabel="1"/>   
                 <f:selectItem itemValue="2" itemLabel="2"/>   
                 <f:selectItem itemValue="3" itemLabel="3"/>

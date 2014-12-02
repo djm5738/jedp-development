@@ -32,7 +32,7 @@
                 <f:verbatim><br/></f:verbatim>
                 <b><h:outputText value="#{fullname} "/></b>
                 <f:verbatim>(that's you!)</f:verbatim>
-                <h:inputText value="#{Candidates.setUserName(username)}" disabled="true" style="border:0px solid #FFFFFF; background-color:#FFFFFF; width:0px" maxlength="0"/>
+                <h:inputText value="#{Candidates.setUserFullName(fullname)}" disabled="true" style="border:0px solid #FFFFFF; background-color:#FFFFFF; width:0px" maxlength="0"/>
                 <!-- For some stupid reason, the line above needs to render in order for the username to get set.
                 Using h:inputHidden will throw a "Illegal Syntax for Set Operation", too. So that's out.
                 So, the style of this is meant to "appear" invisible, even though it will still be on the page.

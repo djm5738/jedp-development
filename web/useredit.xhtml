@@ -58,9 +58,9 @@
         <h:form>
             <b><i><h:outputText value="Remove Existing User" styleClass="style2"/></i></b>
             <f:verbatim><p/></f:verbatim>
-            <h:outputText value="User Name" styleClass="style2"/>
+            <h:outputText value="User's Full Name" styleClass="style2"/>
             <h:panelGroup style="padding-left:4.35em">
-                <h:selectOneMenu value="#{Bean.userName}">
+                <h:selectOneMenu value="#{Bean.userFullName}">
                     <f:selectItems value="#{Bean.listUsers()}" itemLabel="#{Bean.userName}" itemValue="#{Bean.userName}" />
                 </h:selectOneMenu>
                 <f:verbatim><p/></f:verbatim>

@@ -29,12 +29,14 @@ public interface HibernateDAO {
     public List<Questionnaire> generateScorecard(Integer interviewId) throws DataAccessException, java.sql.SQLException;
 
     public Integer getUserID(String userName) throws DataAccessException, java.sql.SQLException;
+    
+    public String getUserName(String userFullName) throws DataAccessException, java.sql.SQLException;
 
     public List<UserAttr> listUsers() throws DataAccessException, java.sql.SQLException;
 
     public void addUser(com.ateam.hibernate.UserAttr obj) throws DataAccessException;
 
-    public void deleteUser(String userName) throws DataAccessException, java.sql.SQLException;
+    public void deleteUser(String userFullName) throws DataAccessException, java.sql.SQLException;
 
     public void addSkill(com.ateam.app.Skills obj) throws DataAccessException;
 
@@ -61,4 +63,6 @@ public interface HibernateDAO {
     public Integer getCandidateID(String candidateName) throws DataAccessException, java.sql.SQLException;
 
     public void addInterview(com.ateam.app.Interviews obj) throws DataAccessException;
+    
+    public Integer getInterviewID(String userName, String candidateName) throws DataAccessException, java.sql.SQLException;
 }

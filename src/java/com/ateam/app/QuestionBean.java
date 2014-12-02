@@ -15,6 +15,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.event.ActionEvent;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -24,21 +25,24 @@ import javax.faces.event.ActionEvent;
 @SessionScoped
 public class QuestionBean implements Serializable {
 
-    String skillId;
-    String questionText;
-    String difficulty;
-    String exTime;
-    String exAnswer;
-    String questionType;
-    String businessUnit;
-    String feedback;
-    String questionId;
-    Integer interviewId;
-    List status2;
-    List status3;
-    HibernateDAO dao;
-    com.ateam.app.Questions q;
-    String candidateName;
+    private String skillId;
+    private String questionText;
+    private String difficulty;
+    private String exTime;
+    private String exAnswer;
+    private String questionType;
+    private String businessUnit;
+    private String feedback;
+    private String feedbackStarter;
+    private Integer questionId;
+    private Integer interviewId;
+    private List generatedQuestionList;
+    private com.ateam.app.Questions generatedQuestion;
+    private List generatedScorecardList;
+    private com.ateam.app.Questionnaire generatedScorecard;
+    private HibernateDAO dao;
+    private com.ateam.app.Questions q;
+    private String candidateName;
 
     public String getCandidateName() {
         return candidateName;
@@ -72,7 +76,11 @@ public class QuestionBean implements Serializable {
         this.feedback = feedback;
     }
 
-    public void setQuestionId(String questionId) {
+    public void setFeedbackStarter(String feedbackStarter) {
+        this.feedbackStarter = feedbackStarter;
+    }
+    
+    public void setQuestionId(Integer questionId) {
         this.questionId = questionId;
     }
 
@@ -111,8 +119,12 @@ public class QuestionBean implements Serializable {
     public String getFeedback() {
         return feedback;
     }
+    
+    public String getFeedbackStarter() {
+        return feedbackStarter;
+    }
 
-    public String getQuestionId() {
+    public Integer getQuestionId() {
         return questionId;
     }
 
@@ -120,64 +132,91 @@ public class QuestionBean implements Serializable {
         return interviewId;
     }
 
-    public void unsetSkillId() {
+    public void unsetFields() {
         this.skillId = null;
+        this.difficulty = null;
+        this.feedback = null;
+        this.feedbackStarter = null;
+        this.questionId = null;
+        this.interviewId = null;
+    }
+
+    public void unsetAllFields() {
+        this.skillId = null;
+        this.questionText = null;
+        this.difficulty = null;
+        this.exTime = null;
+        this.exAnswer = null;
+        this.questionType = null;
+        this.businessUnit = null;
+        this.feedback = null;
+        this.feedbackStarter = null;
+        this.questionId = null;
+        this.interviewId = null;
+        this.generatedQuestion = null;
+        this.generatedScorecard = null;
     }
 
     public String generateQuestion() throws Exception {
-        String status = "placeholder";
+        String status;
         HibernateDAO dao = (HibernateDAO) ServiceFinder.findBean("SpringHibernateDao");
-        com.ateam.app.Questions q = new com.ateam.app.Questions();
+        q = new com.ateam.app.Questions();
         q.setSkillId(getSkillId());
         q.setDifficulty(getDifficulty());
-        status2 = dao.generateQuestion(getSkillId(), getDifficulty());
+        generatedQuestionList = dao.generateQuestion(getSkillId(), getDifficulty());
+        generatedQuestion = (Questions) generatedQuestionList.get(0);
+        this.unsetFields();
         status = "results";
         return status;
     }
 
     public String adminGenerateQuestion() throws Exception {
-        String status = "placeholder";
+        String status;
         dao = (HibernateDAO) ServiceFinder.findBean("SpringHibernateDao");
         q = new com.ateam.app.Questions();
         q.setSkillId(getSkillId());
         q.setDifficulty(getDifficulty());
-        status2 = dao.generateQuestion(getSkillId(), getDifficulty());
+        generatedQuestionList = dao.generateQuestion(getSkillId(), getDifficulty());
+        generatedQuestion = (Questions) generatedQuestionList.get(0);
+        this.unsetFields();
         status = "adminResults";
         return status;
     }
 
     public String adminGenerateScorecard() throws Exception {
-        String status = "placeholder";
+        String status;
         dao = (HibernateDAO) ServiceFinder.findBean("SpringHibernateDao");
         com.ateam.app.Questionnaire s = new com.ateam.app.Questionnaire();
         s.setInterviewId(getInterviewId());
-        status3 = dao.generateScorecard(getInterviewId());
+        generatedScorecardList = dao.generateScorecard(getInterviewId());
+        generatedScorecard = (Questionnaire) generatedScorecardList.get(0);
         status = "adminResultssc";
         return status;
     }
 
     public String generateScorecard() throws Exception {
-        String status = "placeholder";
+        String status;
         dao = (HibernateDAO) ServiceFinder.findBean("SpringHibernateDao");
         com.ateam.app.Questionnaire s = new com.ateam.app.Questionnaire();
         s.setInterviewId(getInterviewId());
-        status3 = dao.generateScorecard(getInterviewId());
+        generatedScorecardList = dao.generateScorecard(getInterviewId());
+        generatedScorecard = (Questionnaire) generatedScorecardList.get(0);
         status = "resultssc";
         return status;
     }
 
     public List scorecardReport() throws Exception {
-        return status3;
+        return generatedScorecardList;
     }
 
     public List questionList() throws Exception {
-        return status2;
+        return generatedQuestionList;
     }
 
     public void addQuestion() throws Exception {
         q.setSkillId(getSkillId());
         q.setDifficulty(getDifficulty());
-        status2.add(dao.generateQuestion(getSkillId(), getDifficulty()));
+        generatedQuestionList.add(dao.generateQuestion(getSkillId(), getDifficulty()));
     }
 
     public List listSkillsq() throws Exception {
@@ -195,13 +234,20 @@ public class QuestionBean implements Serializable {
     }
 
     public String addFeedback() throws Exception {
-        String status = "placeholder";
-        HibernateDAO dao2 = (HibernateDAO) ServiceFinder.findBean("SpringHibernateDao");
+        String status;
+        HibernateDAO dao = (HibernateDAO) ServiceFinder.findBean("SpringHibernateDao");
         com.ateam.app.Questionnaire s = new com.ateam.app.Questionnaire();
-        s.setFeedback(getFeedback());
-        s.setInterviewId(getInterviewId());
-        s.setQuestionId(getQuestionId());
-        dao2.addFeedback(s);
+        s.setFeedback(getFeedbackStarter() + getFeedback());
+
+        FacesContext context = FacesContext.getCurrentInstance();
+        HttpSession session = (HttpSession) context.getExternalContext().getSession(true);
+        String userName = (String) session.getAttribute("username");
+
+        s.setInterviewId(dao.getInterviewID(userName, this.getCandidateName()));
+        s.setQuestionId(generatedQuestion.getQuestionId());
+        dao.addFeedback(s);
+        
+        this.unsetAllFields();
         status = "success";
         return status;
     }

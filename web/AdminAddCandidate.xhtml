@@ -29,7 +29,8 @@
             <h:panelGroup>
                 <h:outputText value="Assign Interviewer" styleClass="style2"/>
                 <f:verbatim><br/></f:verbatim>
-                <h:selectOneMenu value="#{Candidates.userName}">
+                <h:selectOneMenu value="#{Candidates.userFullName}">
+                    <f:selectItem itemValue="#{null}" itemLabel="[Select Interviewer]"  noSelectionOption="true"/>
                     <f:selectItems value="#{Bean.listUsers()}" itemLabel="#{Bean.userName}" itemValue="#{Bean.userName}"/>
                 </h:selectOneMenu>
             </h:panelGroup>

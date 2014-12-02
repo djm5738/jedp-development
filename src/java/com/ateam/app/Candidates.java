@@ -19,7 +19,7 @@ public class Candidates implements Serializable {
     private String availability;
     private List<String> skillId;
     private Integer userId;
-    private String userName;
+    private String userFullName;
 
     public Candidates() {
     }
@@ -45,12 +45,12 @@ public class Candidates implements Serializable {
         this.userId = userId;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUserFullName() {
+        return userFullName;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUserFullName(String userFullName) {
+        this.userFullName = userFullName;
     }
 
     public Integer getCandidateId() {
@@ -108,7 +108,7 @@ public class Candidates implements Serializable {
         this.setAvailability(null);
         this.setSkillId(null);
         this.setUserId(null);
-        this.setUserName(null);
+        this.setUserFullName(null);
         this.setSkillId(null);
     }
 
@@ -125,7 +125,7 @@ public class Candidates implements Serializable {
             candidateSkill.unsetFields();
         }
 
-        com.ateam.app.Interviews interview = new com.ateam.app.Interviews(candidate.candidateId, this.userName);
+        com.ateam.app.Interviews interview = new com.ateam.app.Interviews(candidate.candidateId, dao.getUserName(this.userFullName));
         dao.addInterview(interview);
 
         this.unsetFields();

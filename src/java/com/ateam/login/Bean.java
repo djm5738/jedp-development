@@ -90,7 +90,7 @@ public class Bean implements Serializable {
 
         HibernateDAO dao = (HibernateDAO) ServiceFinder.findBean("SpringHibernateDao");
 
-        dao.deleteUser(getUserName());
+        dao.deleteUser(getUserFullName());
         
         this.unsetFields();
         
